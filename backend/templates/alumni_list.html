@@ -1,1 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Alumni List{% endblock %}
+{% block content %}
+  <h2>Alumni</h2>
+  {% if session.perms.insert %}
+    <a href="{{ url_for('alumni.add') }}" class="btn btn-primary mb-3">Add New Alumni</a>
+  {% endif %}
+  <table class="table table-striped">
+    <thead>
+      <tr><th>ID</th><th>Name</th><th>Email</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for a in alumni %}
+        <tr>
+          <td>{{ a.alumniID }}</td>
+          <td>{{ a.fName }} {{ a.lName }}</td>
+          <td>{{ a.email }}</td>
+          <td>
+            {% if session.perms.update %}
+              <a href="{{ url_for('alumni.edit', id=a.alumniID) }}" class="btn btn-sm btn-warning">Edit</a>
+            {% endif %}
+            {% if session.perms.delete %}
+              <form method="post" action="{{ url_for('alumni.delete', id=a.alumniID) }}" style="display:inline">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
 
