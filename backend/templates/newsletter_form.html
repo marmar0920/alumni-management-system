@@ -1,1 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Newsletter Form{% endblock %}
+{% block content %}
+  <h2>Newsletter</h2>
+  <form method="post">
+    {{ form.csrf_token }}
+    {{ form.subject.label }} {{ form.subject(class="form-control mb-2") }}
+    {{ form.body.label }} {{ form.body(class="form-control mb-2") }}
+    {{ form.sendDate.label }} {{ form.sendDate(class="form-control mb-2") }}
+    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+  </form>
+{% endblock %}
 
