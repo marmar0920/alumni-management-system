@@ -1,1 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Degree List{% endblock %}
+{% block content %}
+  <h2>Degrees</h2>
+  {% if session.perms.insert %}
+    <a href="{{ url_for('degree.add') }}" class="btn btn-primary mb-3">Add New Degree</a>
+  {% endif %}
+  <table class="table table-striped">
+    <thead>
+      <tr><th>ID</th><th>Type</th><th>Institution</th><th>Major</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for d in degrees %}
+        <tr>
+          <td>{{ d.degreeID }}</td>
+          <td>{{ d.degreeType }}</td>
+          <td>{{ d.institution }}</td>
+          <td>{{ d.major }}</td>
+          <td>
+            {% if session.perms.update %}
+              <a href="{{ url_for('degree.edit', id=d.degreeID) }}" class="btn btn-sm btn-warning">Edit</a>
+            {% endif %}
+            {% if session.perms.delete %}
+              <form method="post" action="{{ url_for('degree.delete', id=d.degreeID) }}" style="display:inline">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
 
