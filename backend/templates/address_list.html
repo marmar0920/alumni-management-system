@@ -1,1 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Address List{% endblock %}
+{% block content %}
+  <h2>Addresses</h2>
+  {% if session.perms.insert %}
+    <a href="{{ url_for('address.add') }}" class="btn btn-primary mb-3">Add New Address</a>
+  {% endif %}
+  <table class="table table-striped">
+    <thead>
+      <tr><th>ID</th><th>Address</th><th>City</th><th>State</th><th>Zip</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for a in addresses %}
+        <tr>
+          <td>{{ a.addressID }}</td>
+          <td>{{ a.address }}</td>
+          <td>{{ a.city }}</td>
+          <td>{{ a.state }}</td>
+          <td>{{ a.zipCode }}</td>
+          <td>
+            {% if session.perms.update %}
+              <a href="{{ url_for('address.edit', id=a.addressID) }}" class="btn btn-sm btn-warning">Edit</a>
+            {% endif %}
+            {% if session.perms.delete %}
+              <form method="post" action="{{ url_for('address.delete', id=a.addressID) }}" style="display:inline">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
 
