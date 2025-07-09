@@ -1,1 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Skillset Form{% endblock %}
+{% block content %}
+  <h2>Skillset</h2>
+  <form method="post">
+    {{ form.csrf_token }}
+    {{ form.skillName.label }} {{ form.skillName(class="form-control mb-2") }}
+    {{ form.proficiencyLevel.label }} {{ form.proficiencyLevel(class="form-control mb-2") }}
+    {{ form.endorsementYN.label }} {{ form.endorsementYN(class="form-select mb-2") }}
+    {{ form.dateReceived.label }} {{ form.dateReceived(class="form-control mb-2") }}
+    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+  </form>
+{% endblock %}
 
