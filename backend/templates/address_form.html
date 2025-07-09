@@ -1,1 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Address Form{% endblock %}
+{% block content %}
+  <h2>Address</h2>
+  <form method="post">
+    {{ form.csrf_token }}
+    {{ form.address.label }} {{ form.address(class="form-control mb-2") }}
+    {{ form.city.label }} {{ form.city(class="form-control mb-2") }}
+    {{ form.state.label }} {{ form.state(class="form-control mb-2") }}
+    {{ form.zipCode.label }} {{ form.zipCode(class="form-control mb-2") }}
+    {{ form.activeYN.label }} {{ form.activeYN(class="form-select mb-2") }}
+    {{ form.primaryYN.label }} {{ form.primaryYN(class="form-select mb-2") }}
+    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+  </form>
+{% endblock %}
 
