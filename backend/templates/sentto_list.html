@@ -1,1 +1,34 @@
+{% extends "base.html" %}
+{% block title %}SentTo List{% endblock %}
+{% block content %}
+  <h2>SentTo Records</h2>
+  {% if session.perms.insert %}
+    <a href="{{ url_for('sentto.add') }}" class="btn btn-primary mb-3">Add New SentTo</a>
+  {% endif %}
+  <table class="table table-striped">
+    <thead>
+      <tr><th>ID</th><th>Newsletter</th><th>Alumni</th><th>Sent Date</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for s in senttos %}
+        <tr>
+          <td>{{ s.senttoID }}</td>
+          <td>{{ s.newsletterID }}</td>
+          <td>{{ s.alumniID }}</td>
+          <td>{{ s.sentDate }}</td>
+          <td>
+            {% if session.perms.update %}
+              <a href="{{ url_for('sentto.edit', id=s.senttoID) }}" class="btn btn-sm btn-warning">Edit</a>
+            {% endif %}
+            {% if session.perms.delete %}
+              <form method="post" action="{{ url_for('sentto.delete', id=s.senttoID) }}" style="display:inline">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
 
