@@ -1,4 +1,4 @@
-rom flask import Blueprint, render_template, redirect, url_for, session, flash
+from flask import Blueprint, render_template, redirect, url_for, session, flash
 from ..forms.login_form import LoginForm
 from ..models.user import User
 from ..utils.db_connect import db
