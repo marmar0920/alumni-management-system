@@ -103,8 +103,6 @@ cd alumni-management-system
 
 ### 2️ Create Virtual Environment
 powershell
-Copy
-Edit
 python -m venv .venv
 .venv\Scripts\activate
 
