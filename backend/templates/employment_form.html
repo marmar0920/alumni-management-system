@@ -1,1 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Employment Form{% endblock %}
+{% block content %}
+  <h2>Employment</h2>
+  <form method="post">
+    {{ form.csrf_token }}
+    {{ form.companyName.label }} {{ form.companyName(class="form-control mb-2") }}
+    {{ form.jobTitle.label }} {{ form.jobTitle(class="form-control mb-2") }}
+    {{ form.startDate.label }} {{ form.startDate(class="form-control mb-2") }}
+    {{ form.endDate.label }} {{ form.endDate(class="form-control mb-2") }}
+    {{ form.currentYN.label }} {{ form.currentYN(class="form-select mb-2") }}
+    {{ form.primaryYN.label }} {{ form.primaryYN(class="form-select mb-2") }}
+    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+  </form>
+{% endblock %}
 
