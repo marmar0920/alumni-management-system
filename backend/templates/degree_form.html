@@ -1,1 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Degree Form{% endblock %}
+{% block content %}
+  <h2>Degree</h2>
+  <form method="post">
+    {{ form.csrf_token }}
+    {{ form.degreeType.label }} {{ form.degreeType(class="form-control mb-2") }}
+    {{ form.institution.label }} {{ form.institution(class="form-control mb-2") }}
+    {{ form.major.label }} {{ form.major(class="form-control mb-2") }}
+    {{ form.conferredDate.label }} {{ form.conferredDate(class="form-control mb-2") }}
+    {{ form.primaryYN.label }} {{ form.primaryYN(class="form-select mb-2") }}
+    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+  </form>
+{% endblock %}
 
