@@ -1,1 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Skillset List{% endblock %}
+{% block content %}
+  <h2>Skillsets</h2>
+  {% if session.perms.insert %}
+    <a href="{{ url_for('skillset.add') }}" class="btn btn-primary mb-3">Add New Skillset</a>
+  {% endif %}
+  <table class="table table-striped">
+    <thead>
+      <tr><th>ID</th><th>Skill Name</th><th>Proficiency</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      {% for s in skillsets %}
+        <tr>
+          <td>{{ s.skillsetID }}</td>
+          <td>{{ s.skillName }}</td>
+          <td>{{ s.proficiencyLevel }}</td>
+          <td>
+            {% if session.perms.update %}
+              <a href="{{ url_for('skillset.edit', id=s.skillsetID) }}" class="btn btn-sm btn-warning">Edit</a>
+            {% endif %}
+            {% if session.perms.delete %}
+              <form method="post" action="{{ url_for('skillset.delete', id=s.skillsetID) }}" style="display:inline">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
 
