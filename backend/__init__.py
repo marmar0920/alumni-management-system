@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from backend.utils.db_connect import db
 from backend.utils.config import Config
 
@@ -18,10 +18,10 @@ def create_app():
     app.config.from_object(Config)
     db.init_app(app)
 
-    # Optional root route
+    # Root route: automatically redirect to alumni list
     @app.route('/')
     def home():
-        return "Welcome to the Alumni Management System"
+        return redirect(url_for('alumni.list_alumni'))
 
     # Register Blueprints
     app.register_blueprint(auth_bp)
