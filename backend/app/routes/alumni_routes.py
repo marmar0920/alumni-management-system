@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, session, flash, request
-from ..models.alumni import Alumni
-from ..forms.alumni_form import AlumniForm
-from ..utils.db_connect import db
+from backend.models.alumni import Alumni
+from backend.app.forms.alumni_form import AlumniForm
+from backend.utils.db_connect import db
 
 alumni_bp = Blueprint('alumni', __name__, url_prefix='/alumni')
 
