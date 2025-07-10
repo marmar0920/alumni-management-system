@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, session, flash
-from ..forms.login_form import LoginForm
-from ..models.user import User
-from ..utils.db_connect import db
+from backend.app.forms.login_form import LoginForm
+from backend.models.user import User
+from backend.utils.db_connect import db
 
 auth_bp = Blueprint('auth', __name__)
 
