@@ -31,7 +31,7 @@ class Alumni(db.Model):
     employments = db.relationship('Employment', backref='alumnus', cascade='all, delete-orphan')
     donations = db.relationship('Donation', backref='alumnus', cascade='all, delete-orphan')
     skills = db.relationship('Skillset', backref='alumnus', cascade='all, delete-orphan')
+    sentTo = db.relationship('SentTo', back_populates='alumni')
 
     def __repr__(self):
-        return f'<Alumni {self.fName} {self.lName}>'
-
+        return f"<Alumni {self.alumniID} - {self.fName} {self.lName}>"
