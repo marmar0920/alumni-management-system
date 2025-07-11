@@ -13,7 +13,9 @@ with app.app_context():
     else:
         new_user = User(
             UID='testuser',
-            password='testpass',
+            password='testpass',fName='Test',
+            lName='User',
+            jobDescription='Admin',
             viewPriveledgeYN='Y',
             insertPriveledgeYN='Y',
             updatePriveledgeYN='Y',
@@ -21,4 +23,4 @@ with app.app_context():
         )
         db.session.add(new_user)
         db.session.commit()
-        print("Test user created successfully!")
+    print("Test user created successfully!")
