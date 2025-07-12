@@ -30,3 +30,22 @@ def add_alumni():
         flash('Added successfully', 'success')
         return redirect(url_for('alumni.list_alumni'))
     return render_template('alumni_form.html', form=form)
+
+@alumni_bp.route('/edit/<int:alumniID>', methods=['GET', 'POST'])
+def edit_alumni(alumniID):
+    if session.get('perms', {}).get('update') != 'Y':
+        flash('Not allowed', 'warning')
+        return redirect(url_for('alumni.list_alumni'))
+    
+    alumnus = Alumni.query.get_or_404(alumniID)
+    form = AlumniForm(obj=alumnus)
+    
+    if form.validate_on_submit():
+        for field in form.data:
+            if field not in ('csrf_token', 'submit'):
+                setattr(alumnus, field, getattr(form, field).data)
+        db.session.commit()
+        flash('Updated successfully', 'success')
+        return redirect(url_for('alumni.list_alumni'))
+    
+    return render_template('alumni_form.html', form=form)
