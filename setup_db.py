@@ -6,10 +6,10 @@ with app.app_context():
     print("Creating all database tables (if not exist)...")
     db.create_all()
 
-    print("Checking for existing test user...")
+    print("Checking for existing user 105386...")
     existing_user = User.query.filter_by(UID='105386').first()
     if existing_user:
-        print("Test user already exists!")
+        print("User 105386 already exists!")
     else:
         new_user = User(
             UID='105386',
@@ -24,4 +24,4 @@ with app.app_context():
         )
         db.session.add(new_user)
         db.session.commit()
-    print("Test user created successfully!")
+    print("User 105386 created successfully!")
