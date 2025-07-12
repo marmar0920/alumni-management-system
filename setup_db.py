@@ -12,8 +12,8 @@ with app.app_context():
         print("Test user already exists!")
     else:
         new_user = User(
-            UID='testuser',
-            password='testpass',fName='Test',
+            UID='105386',
+            password='MyDogButch2024',fName='Test',
             lName='User',
             jobDescription='Admin',
             viewPriveledgeYN='Y',
