@@ -13,7 +13,8 @@ with app.app_context():
     else:
         new_user = User(
             UID='105386',
-            password='MyDogButch2024',fName='Test',
+            password='MyDogButch2024',
+            fName='Test',
             lName='User',
             jobDescription='Admin',
             viewPriveledgeYN='Y',
