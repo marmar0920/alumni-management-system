@@ -8,7 +8,7 @@ auth_bp = Blueprint('auth_bp', __name__, url_prefix='/auth')
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(UID=form.username.data).first()
+        user = User.query.filter_by(UID=form.UID.data).first()
         if user and user.password == form.password.data:
             session['user_id'] = user.UID
             session['perms'] = {
