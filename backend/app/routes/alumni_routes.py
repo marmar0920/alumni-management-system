@@ -20,7 +20,11 @@ def add_alumni():
         return redirect(url_for('alumni.list_alumni'))
     form = AlumniForm()
     if form.validate_on_submit():
-        new_alumnus = Alumni(**{f: getattr(form, f).data for f in form.data if f != 'csrf_token'})
+        new_alumnus = Alumni(**{
+            f: getattr(form, f).data
+            for f in form.data
+            if f not in ('csrf_token', 'submit')
+        })
         db.session.add(new_alumnus)
         db.session.commit()
         flash('Added successfully', 'success')
