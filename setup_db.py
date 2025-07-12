@@ -7,7 +7,7 @@ with app.app_context():
     db.create_all()
 
     print("Checking for existing test user...")
-    existing_user = User.query.filter_by(UID='testuser').first()
+    existing_user = User.query.filter_by(UID='105386').first()
     if existing_user:
         print("Test user already exists!")
     else:
