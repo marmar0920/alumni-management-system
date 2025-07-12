@@ -28,7 +28,7 @@ def add_newsletter():
         return redirect(url_for('newsletter.list_newsletters'))
     form = NewsletterForm()
     if form.validate_on_submit():
-        new_newsletter = Newsletter(**{f: getattr(form, f).data for f in form.data if f != 'csrf_token'})
+        new_newsletter = Newsletter(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})
         db.session.add(new_newsletter)
         db.session.commit()
         flash('Newsletter added successfully', 'success')

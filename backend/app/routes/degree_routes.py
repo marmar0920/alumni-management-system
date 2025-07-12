@@ -28,8 +28,7 @@ def add_degree():
         return redirect(url_for('degree.list_degrees'))
     form = DegreeForm()
     if form.validate_on_submit():
-        new_degree = Degree(**{f: getattr(form, f).data for f in form.data if f != 'csrf_token'})
-        db.session.add(new_degree)
+ new_degree = Degree(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})        db.session.add(new_degree)
         db.session.commit()
         flash('Degree added successfully', 'success')
         return redirect(url_for('degree.list_degrees'))

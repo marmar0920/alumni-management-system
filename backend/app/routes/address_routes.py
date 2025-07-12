@@ -28,8 +28,7 @@ def add_address():
         return redirect(url_for('address.list_addresses'))
     form = AddressForm()
     if form.validate_on_submit():
-        new_address = Address(**{f: getattr(form, f).data for f in form.data if f != 'csrf_token'})
-        db.session.add(new_address)
+  new_address = Address(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})        db.session.add(new_address)
         db.session.commit()
         flash('Address added successfully', 'success')
         return redirect(url_for('address.list_addresses'))

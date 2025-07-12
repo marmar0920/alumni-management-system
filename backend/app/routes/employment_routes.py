@@ -28,7 +28,7 @@ def add_employment():
         return redirect(url_for('employment.list_employments'))
     form = EmploymentForm()
     if form.validate_on_submit():
-        new_employment = Employment(**{f: getattr(form, f).data for f in form.data if f != 'csrf_token'})
+        new_employment = Employment(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})
         db.session.add(new_employment)
         db.session.commit()
         flash('Employment added successfully', 'success')

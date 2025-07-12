@@ -28,7 +28,7 @@ def add_skillset():
         return redirect(url_for('skillset.list_skillsets'))
     form = SkillsetForm()
     if form.validate_on_submit():
-        new_skillset = Skillset(**{f: getattr(form, f).data for f in form.data if f != 'csrf_token'})
+        new_skillset = Skillset(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})
         db.session.add(new_skillset)
         db.session.commit()
         flash('Skillset added successfully', 'success')

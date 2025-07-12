@@ -20,7 +20,7 @@ def add_sentto():
         return redirect(url_for('sentto.list_sentto'))
     form = SentToForm()
     if form.validate_on_submit():
-        new_entry = SentTo(**{f: getattr(form, f).data for f in form.data if f != 'csrf_token'})
+        new_entry = SentTo(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})
         db.session.add(new_entry)
         db.session.commit()
         flash('SentTo entry added successfully', 'success')
