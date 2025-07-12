@@ -3,7 +3,7 @@
 {% block content %}
   <h2>Alumni</h2>
   {% if session.perms.insert %}
-    <a href="{{ url_for('alumni.add') }}" class="btn btn-primary mb-3">Add New Alumni</a>
+    <a href="{{ url_for('alumni.add_alumni') }}" class="btn btn-primary mb-3">Add New Alumnus</a>
   {% endif %}
   <table class="table table-striped">
     <thead>
@@ -17,10 +17,10 @@
           <td>{{ a.email }}</td>
           <td>
             {% if session.perms.update %}
-              <a href="{{ url_for('alumni.edit', id=a.alumniID) }}" class="btn btn-sm btn-warning">Edit</a>
+              <a href="{{ url_for('alumni.edit_alumni', alumniID=a.alumniID) }}" class="btn btn-sm btn-warning">Edit</a>
             {% endif %}
             {% if session.perms.delete %}
-              <form method="post" action="{{ url_for('alumni.delete', id=a.alumniID) }}" style="display:inline">
+              <form method="post" action="{{ url_for('alumni.delete_alumni', alumniID=a.alumniID) }}" style="display:inline">
                 <button class="btn btn-sm btn-danger">Delete</button>
               </form>
             {% endif %}
