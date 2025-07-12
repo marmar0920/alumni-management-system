@@ -1,16 +1,33 @@
 {% extends "base.html" %}
-{% block title %}Login{% endblock %}
+{% block title %}Add New Alumnus{% endblock %}
 {% block content %}
-  <h2>Login</h2>
+  <h2>Add New Alumnus</h2>
   <form method="post">
-    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
     <div class="mb-3">
-      {{ form.UID.label }} {{ form.UID(class="form-control") }}
+      {{ form.fName.label }} {{ form.fName(class="form-control") }}
     </div>
     <div class="mb-3">
-      {{ form.password.label }} {{ form.password(class="form-control") }}
+      {{ form.lName.label }} {{ form.lName(class="form-control") }}
     </div>
-    <button type="submit" class="btn btn-primary">{{ form.submit.label.text }}</button>
+    <div class="mb-3">
+      {{ form.email.label }} {{ form.email(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.phone.label }} {{ form.phone(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.DOB.label }} {{ form.DOB(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.gender.label }} {{ form.gender(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.ethnicity.label }} {{ form.ethnicity(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.website.label }} {{ form.website(class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-primary") }}
   </form>
 {% endblock %}
-
