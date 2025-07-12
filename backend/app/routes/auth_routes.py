@@ -9,7 +9,11 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(UID=form.UID.data).first()
-        if user and user.password == form.password.data:
+        if user is None:
+            flash('User not found', 'danger')
+        elif not user.check_password(form.password.data):
+            flash('Invalid password', 'danger')
+        else:
             session['user_id'] = user.UID
             session['perms'] = {
                 'view': user.viewPriveledgeYN,
@@ -19,8 +23,6 @@ def login():
             }
             flash('Login successful', 'success')
             return redirect(url_for('alumni.list_alumni'))
-        else:
-            flash('Invalid credentials', 'danger')
     return render_template('login.html', form=form)
 
 @auth_bp.route('/logout')
