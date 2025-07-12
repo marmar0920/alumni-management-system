@@ -49,3 +49,15 @@ def edit_alumni(alumniID):
         return redirect(url_for('alumni.list_alumni'))
     
     return render_template('alumni_form.html', form=form)
+@alumni_bp.route('/delete/<int:alumniID>', methods=['POST'])
+def delete_alumni(alumniID):
+    """Delete an alumni record."""
+    if session.get('perms', {}).get('delete') != 'Y':
+        flash('Not allowed', 'warning')
+        return redirect(url_for('alumni.list_alumni'))
+
+    alumnus = Alumni.query.get_or_404(alumniID)
+    db.session.delete(alumnus)
+    db.session.commit()
+    flash('Deleted successfully', 'success')
+    return redirect(url_for('alumni.list_alumni'))
