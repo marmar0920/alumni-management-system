@@ -2,32 +2,36 @@
 {% block title %}Newsletter List{% endblock %}
 {% block content %}
   <h2>Newsletters</h2>
-  {% if session.perms.insert %}
-    <a href="{{ url_for('newsletter.add') }}" class="btn btn-primary mb-3">Add New Newsletter</a>
+  {% if session.perms.insert == 'Y' %}
+    <a href="{{ url_for('newsletter.add_newsletter') }}" class="btn btn-primary mb-3">Add New Newsletter</a>
   {% endif %}
   <table class="table table-striped">
     <thead>
-      <tr><th>ID</th><th>Subject</th><th>Send Date</th><th>Actions</th></tr>
+      <tr>
+        <th>Title</th>
+        <th>Publish Date</th>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody>
-      {% for n in newsletters %}
-        <tr>
-          <td>{{ n.newsletterID }}</td>
-          <td>{{ n.subject }}</td>
-          <td>{{ n.sendDate }}</td>
-          <td>
-            {% if session.perms.update %}
-              <a href="{{ url_for('newsletter.edit', id=n.newsletterID) }}" class="btn btn-sm btn-warning">Edit</a>
-            {% endif %}
-            {% if session.perms.delete %}
-              <form method="post" action="{{ url_for('newsletter.delete', id=n.newsletterID) }}" style="display:inline">
-                <button class="btn btn-sm btn-danger">Delete</button>
-              </form>
-            {% endif %}
-          </td>
-        </tr>
+      {% for news in newsletters %}
+      <tr>
+        <td>{{ news.title }}</td>
+        <td>{{ news.publishDate }}</td>
+        <td>
+          {% if session.perms.update == 'Y' %}
+            <a href="{{ url_for('newsletter.edit_newsletter', NID=news.NID) }}" class="btn btn-sm btn-warning">Edit</a>
+          {% endif %}
+          {% if session.perms.delete == 'Y' %}
+            <form method="post" action="{{ url_for('newsletter.delete_newsletter', NID=news.NID) }}" style="display:inline">
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
       {% endfor %}
     </tbody>
   </table>
 {% endblock %}
+
 

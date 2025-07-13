@@ -2,32 +2,40 @@
 {% block title %}Employment List{% endblock %}
 {% block content %}
   <h2>Employment</h2>
-  {% if session.perms.insert %}
-    <a href="{{ url_for('employment.add') }}" class="btn btn-primary mb-3">Add New Employment</a>
+  {% if session.perms.insert == 'Y' %}
+    <a href="{{ url_for('employment.add_employment') }}" class="btn btn-primary mb-3">Add New Employment</a>
   {% endif %}
   <table class="table table-striped">
     <thead>
-      <tr><th>ID</th><th>Company</th><th>Job Title</th><th>Actions</th></tr>
+      <tr>
+        <th>Company</th>
+        <th>Job Title</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody>
-      {% for e in employments %}
-        <tr>
-          <td>{{ e.employmentID }}</td>
-          <td>{{ e.companyName }}</td>
-          <td>{{ e.jobTitle }}</td>
-          <td>
-            {% if session.perms.update %}
-              <a href="{{ url_for('employment.edit', id=e.employmentID) }}" class="btn btn-sm btn-warning">Edit</a>
-            {% endif %}
-            {% if session.perms.delete %}
-              <form method="post" action="{{ url_for('employment.delete', id=e.employmentID) }}" style="display:inline">
-                <button class="btn btn-sm btn-danger">Delete</button>
-              </form>
-            {% endif %}
-          </td>
-        </tr>
+      {% for emp in employments %}
+      <tr>
+        <td>{{ emp.company }}</td>
+        <td>{{ emp.jobTitle }}</td>
+        <td>{{ emp.startDate }}</td>
+        <td>{{ emp.endDate }}</td>
+        <td>
+          {% if session.perms.update == 'Y' %}
+            <a href="{{ url_for('employment.edit_employment', EID=emp.EID) }}" class="btn btn-sm btn-warning">Edit</a>
+          {% endif %}
+          {% if session.perms.delete == 'Y' %}
+            <form method="post" action="{{ url_for('employment.delete_employment', EID=emp.EID) }}" style="display:inline">
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
       {% endfor %}
     </tbody>
   </table>
 {% endblock %}
+
 

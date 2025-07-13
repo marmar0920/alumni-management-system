@@ -1,33 +1,37 @@
 {% extends "base.html" %}
 {% block title %}Skillset List{% endblock %}
 {% block content %}
-  <h2>Skillsets</h2>
-  {% if session.perms.insert %}
-    <a href="{{ url_for('skillset.add') }}" class="btn btn-primary mb-3">Add New Skillset</a>
+  <h2>Skills</h2>
+  {% if session.perms.insert == 'Y' %}
+    <a href="{{ url_for('skillset.add_skillset') }}" class="btn btn-primary mb-3">Add New Skill</a>
   {% endif %}
   <table class="table table-striped">
     <thead>
-      <tr><th>ID</th><th>Skill Name</th><th>Proficiency</th><th>Actions</th></tr>
+      <tr>
+        <th>Skill</th>
+        <th>Proficiency</th>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody>
-      {% for s in skillsets %}
-        <tr>
-          <td>{{ s.skillsetID }}</td>
-          <td>{{ s.skillName }}</td>
-          <td>{{ s.proficiencyLevel }}</td>
-          <td>
-            {% if session.perms.update %}
-              <a href="{{ url_for('skillset.edit', id=s.skillsetID) }}" class="btn btn-sm btn-warning">Edit</a>
-            {% endif %}
-            {% if session.perms.delete %}
-              <form method="post" action="{{ url_for('skillset.delete', id=s.skillsetID) }}" style="display:inline">
-                <button class="btn btn-sm btn-danger">Delete</button>
-              </form>
-            {% endif %}
-          </td>
-        </tr>
+      {% for skill in skillsets %}
+      <tr>
+        <td>{{ skill.skill }}</td>
+        <td>{{ skill.proficiency }}</td>
+        <td>
+          {% if session.perms.update == 'Y' %}
+            <a href="{{ url_for('skillset.edit_skillset', SID=skill.SID) }}" class="btn btn-sm btn-warning">Edit</a>
+          {% endif %}
+          {% if session.perms.delete == 'Y' %}
+            <form method="post" action="{{ url_for('skillset.delete_skillset', SID=skill.SID) }}" style="display:inline">
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
       {% endfor %}
     </tbody>
   </table>
 {% endblock %}
+
 

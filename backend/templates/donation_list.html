@@ -2,33 +2,38 @@
 {% block title %}Donation List{% endblock %}
 {% block content %}
   <h2>Donations</h2>
-  {% if session.perms.insert %}
-    <a href="{{ url_for('donation.add') }}" class="btn btn-primary mb-3">Add New Donation</a>
+  {% if session.perms.insert == 'Y' %}
+    <a href="{{ url_for('donation.add_donation') }}" class="btn btn-primary mb-3">Add New Donation</a>
   {% endif %}
   <table class="table table-striped">
     <thead>
-      <tr><th>ID</th><th>Date</th><th>Amount</th><th>Method</th><th>Actions</th></tr>
+      <tr>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Reason</th>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody>
-      {% for d in donations %}
-        <tr>
-          <td>{{ d.donationID }}</td>
-          <td>{{ d.donationDate }}</td>
-          <td>{{ d.amount }}</td>
-          <td>{{ d.method }}</td>
-          <td>
-            {% if session.perms.update %}
-              <a href="{{ url_for('donation.edit', id=d.donationID) }}" class="btn btn-sm btn-warning">Edit</a>
-            {% endif %}
-            {% if session.perms.delete %}
-              <form method="post" action="{{ url_for('donation.delete', id=d.donationID) }}" style="display:inline">
-                <button class="btn btn-sm btn-danger">Delete</button>
-              </form>
-            {% endif %}
-          </td>
-        </tr>
+      {% for don in donations %}
+      <tr>
+        <td>{{ don.amount }}</td>
+        <td>{{ don.donationDate }}</td>
+        <td>{{ don.reason }}</td>
+        <td>
+          {% if session.perms.update == 'Y' %}
+            <a href="{{ url_for('donation.edit_donation', donationID=don.donationID) }}" class="btn btn-sm btn-warning">Edit</a>
+          {% endif %}
+          {% if session.perms.delete == 'Y' %}
+            <form method="post" action="{{ url_for('donation.delete_donation', donationID=don.donationID) }}" style="display:inline">
+              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+            </form>
+          {% endif %}
+        </td>
+      </tr>
       {% endfor %}
     </tbody>
   </table>
 {% endblock %}
+
 
