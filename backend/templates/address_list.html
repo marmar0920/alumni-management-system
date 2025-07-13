@@ -2,9 +2,6 @@
 {% block title %}Address List{% endblock %}
 {% block content %}
   <h2>Addresses</h2>
-  {% if session.perms.insert == 'Y' %}
-    <a href="{{ url_for('address.add_address') }}" class="btn btn-primary mb-3">Add New Address</a>
-  {% endif %}
   <table class="table table-striped">
     <thead>
       <tr>
@@ -39,4 +36,3 @@
     </tbody>
   </table>
 {% endblock %}
-
