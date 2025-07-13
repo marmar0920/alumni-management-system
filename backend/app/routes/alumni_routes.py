@@ -39,7 +39,7 @@ def edit_alumni(alumniID):
     
     alumnus = Alumni.query.get_or_404(alumniID)
     form = AlumniForm(obj=alumnus)
-    addresses = alumnus.addresses  # ✅ Get related addresses
+    addresses = alumnus.addresses 
 
     if form.validate_on_submit():
         for field in form.data:
