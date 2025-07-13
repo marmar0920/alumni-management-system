@@ -1,6 +1,4 @@
 from backend.utils.db_connect import db
-from backend.models.address import Address
-
 
 class Alumni(db.Model):
     __tablename__ = 'alumni'
@@ -27,7 +25,7 @@ class Alumni(db.Model):
     deceasedDT = db.Column(db.Date)
     deceasedNotes = db.Column(db.Text)
 
-    # Relationships
+    # Relationships (strings avoid import errors)
     addresses = db.relationship('Address', backref='alumnus', cascade='all, delete-orphan')
     degrees = db.relationship('Degree', backref='alumnus', cascade='all, delete-orphan')
     employments = db.relationship('Employment', backref='alumnus', cascade='all, delete-orphan')

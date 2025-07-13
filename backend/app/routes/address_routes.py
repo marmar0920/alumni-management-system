@@ -28,7 +28,11 @@ def add_address():
         return redirect(url_for('address.list_addresses'))
     form = AddressForm()
     if form.validate_on_submit():
-        new_address = Address(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})
+        new_address = Address(**{
+            f: getattr(form, f).data
+            for f in form.data
+            if f not in ('csrf_token', 'submit')
+        })
         db.session.add(new_address)
         db.session.commit()
         flash('Address added successfully', 'success')
@@ -43,7 +47,9 @@ def edit_address(addressID):
     address = Address.query.get_or_404(addressID)
     form = AddressForm(obj=address)
     if form.validate_on_submit():
-        form.populate_obj(address)
+        for field in form.data:
+            if field not in ('csrf_token', 'submit'):
+                setattr(address, field, getattr(form, field).data)
         db.session.commit()
         flash('Address updated successfully', 'success')
         return redirect(url_for('address.list_addresses'))
