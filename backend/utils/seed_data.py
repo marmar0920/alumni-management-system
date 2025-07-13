@@ -63,7 +63,7 @@ def seed_all_data():
                 donationID=100,
                 alumniID=201,
                 donationAmt=500,
-                donationDate=datetime.date(2023, 1, 8),
+                donationDT=datetime.date(2023, 1, 8),
                 reason='Campus initiative',
                 description='A donation of $500 was made for Memorial Day initiatives.'
             )
