@@ -33,7 +33,7 @@
     {{ form.submit(class="btn btn-primary") }}
   </form>
 
-  {% if addresses and alumnus %}
+  {% if alumnus and addresses %}
   <h3 class="mt-5">Addresses</h3>
   <table class="table table-striped">
     <thead>
@@ -66,5 +66,4 @@
     </a>
   {% endif %}
   {% endif %}
-
 {% endblock %}
