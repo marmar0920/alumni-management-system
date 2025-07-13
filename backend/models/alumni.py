@@ -35,3 +35,4 @@ class Alumni(db.Model):
 
     def __repr__(self):
         return f"<Alumni {self.alumniID} - {self.fName} {self.lName}>"
+
