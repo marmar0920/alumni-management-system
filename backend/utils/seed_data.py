@@ -76,8 +76,8 @@ def seed_all_data():
             Skillset(
                 SID=100,
                 alumniID=201,
-                skillName='Figma',
-                skillProficiency='Beginner'
+                skill='Figma',
+                proficiency='Beginner'
             )
         ])
         print("Seeded Skillsets.")
