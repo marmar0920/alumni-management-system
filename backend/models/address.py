@@ -1,4 +1,4 @@
-ffrom backend.utils.db_connect import db
+from backend.utils.db_connect import db
 
 class Address(db.Model):
     __tablename__ = 'address'
