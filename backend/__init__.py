@@ -18,12 +18,10 @@ def create_app():
     app.config.from_object(Config)
     db.init_app(app)
 
-    # Root route: automatically redirect to alumni list
     @app.route('/')
     def home():
         return redirect(url_for('alumni.list_alumni'))
 
-    # Register Blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(alumni_bp)
     app.register_blueprint(address_bp)
@@ -33,5 +31,10 @@ def create_app():
     app.register_blueprint(skillset_bp)
     app.register_blueprint(newsletter_bp)
     app.register_blueprint(sentto_bp)
+
+    from backend.utils.seed_data import seed_all_data
+    with app.app_context():
+        db.create_all()
+        seed_all_data()
 
     return app
