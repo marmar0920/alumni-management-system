@@ -49,7 +49,7 @@ def edit_alumni(alumniID):
         flash('Updated successfully', 'success')
         return redirect(url_for('alumni.list_alumni'))
     
-     return render_template('alumni_form.html', form=form, alumnus=alumnus, addresses=addresses)
+        return render_template('alumni_form.html', form=form, alumnus=alumnus, addresses=addresses)
 @alumni_bp.route('/delete/<int:alumniID>', methods=['POST'])
 def delete_alumni(alumniID):
     """Delete an alumni record."""
