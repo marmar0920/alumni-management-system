@@ -5,6 +5,7 @@ from backend.models.degree import Degree
 from backend.models.employment import Employment
 from backend.models.donation import Donation
 from backend.models.skillset import Skillset
+import datetime
 
 def seed_all_data():
     if not Alumni.query.first():
@@ -20,11 +21,20 @@ def seed_all_data():
         ])
         print("Seeded Addresses.")
 
-    if not Degree.query.first():
-        db.session.add_all([
-            Degree(degreeID=100, alumniID=201, major='MIS', graduationDate='2023-05-09', university='KSU', city='Kennesaw', state='GA'),
-        ])
-        print("Seeded Degrees.")
+if not Degree.query.first():
+    db.session.add_all([
+        Degree(
+            degreeID=100,
+            alumniID=201,
+            major='MIS',
+            minor='Cybersecurity',
+            graduationDT='2023-05-09',
+            university='Kennesaw State University',
+            city='Kennesaw',
+            state='GA'
+        )
+    ])
+    print("Seeded Degrees.")
 
     if not Employment.query.first():
         db.session.add_all([
