@@ -5,7 +5,7 @@ class Donation(db.Model):
 
     donationID = db.Column(db.Integer, primary_key=True)
     alumniID = db.Column(db.Integer, db.ForeignKey('alumni.alumniID'))
-    donationAmt = db.Column(db.Numeric(11, 2), nullable=False)
+    amount = db.Column(db.Numeric(11, 2), nullable=False)
     donationDT = db.Column(db.Date, nullable=False)
     reason = db.Column(db.String(200))
     description = db.Column(db.String(200))

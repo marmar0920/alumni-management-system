@@ -48,7 +48,7 @@ def seed_all_data():
                 company='Tech Solutions',
                 city='Atlanta',
                 state='GA',
-                zipCode='30303',
+                zip='30303',
                 jobTitle='Engineer',
                 startDate=datetime.date(2021, 6, 14),
                 currentYN='Y'
@@ -62,8 +62,10 @@ def seed_all_data():
             Donation(
                 donationID=100,
                 alumniID=201,
-                donationAmount=500,
+                amount=500,
                 donationDate=datetime.date(2023, 1, 8)
+                reason='Campus initiative',
+                description='A donation of $500 was made for Memorial Day initiatives.'
             )
         ])
         print("Seeded Donations.")
