@@ -39,9 +39,9 @@ def edit_alumni(alumniID):
     
     alumnus = Alumni.query.get_or_404(alumniID)
     form = AlumniForm(obj=alumnus)
-    addresses = alumnus.addresses 
+    addresses = alumnus.addresses
 
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
         for field in form.data:
             if field not in ('csrf_token', 'submit'):
                 setattr(alumnus, field, getattr(form, field).data)
@@ -49,7 +49,12 @@ def edit_alumni(alumniID):
         flash('Updated successfully', 'success')
         return redirect(url_for('alumni.list_alumni'))
     
-        return render_template('alumni_form.html', form=form, alumnus=alumnus, addresses=addresses)
+    return render_template(
+        'alumni_form.html',
+        form=form,
+        alumnus=alumnus,
+        addresses=addresses
+    )
 @alumni_bp.route('/delete/<int:alumniID>', methods=['POST'])
 def delete_alumni(alumniID):
     """Delete an alumni record."""
