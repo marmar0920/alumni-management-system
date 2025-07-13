@@ -1,4 +1,6 @@
 from backend.utils.db_connect import db
+from backend.models.address import Address
+
 
 class Alumni(db.Model):
     __tablename__ = 'alumni'
