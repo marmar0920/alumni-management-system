@@ -1,69 +1,144 @@
 {% extends "base.html" %}
-{% block title %}Add/Edit Alumnus{% endblock %}
+{% block title %}{{ 'Edit' if alumnus else 'Add New' }} Alumnus{% endblock %}
 
 {% block content %}
-  <h2>{% if alumnus %}Edit{% else %}Add New{% endif %} Alumnus</h2>
-  
-  <form method="post">
-    {{ form.hidden_tag() }}
-    <div class="mb-3">
-      {{ form.fName.label }} {{ form.fName(class="form-control") }}
-    </div>
-    <div class="mb-3">
-      {{ form.lName.label }} {{ form.lName(class="form-control") }}
-    </div>
-    <div class="mb-3">
-      {{ form.email.label }} {{ form.email(class="form-control") }}
-    </div>
-    <div class="mb-3">
-      {{ form.phone.label }} {{ form.phone(class="form-control") }}
-    </div>
-    <div class="mb-3">
-      {{ form.DOB.label }} {{ form.DOB(class="form-control") }}
-    </div>
-    <div class="mb-3">
-      {{ form.gender.label }} {{ form.gender(class="form-control") }}
-    </div>
-    <div class="mb-3">
-      {{ form.ethnicity.label }} {{ form.ethnicity(class="form-control") }}
-    </div>
-    <div class="mb-3">
-      {{ form.website.label }} {{ form.website(class="form-control") }}
-    </div>
-    {{ form.submit(class="btn btn-primary") }}
-  </form>
+<h2 class="mt-4">{{ 'Edit' if alumnus else 'Add New' }} Alumnus</h2>
 
-  {% if alumnus and addresses %}
-  <h3 class="mt-5">Addresses</h3>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Street</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Zip</th>
-        <th>Primary</th>
-        <th>Active</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for addr in addresses %}
-      <tr>
-        <td>{{ addr.address }}</td>
-        <td>{{ addr.city }}</td>
-        <td>{{ addr.state }}</td>
-        <td>{{ addr.zipCode }}</td>
-        <td>{{ addr.primaryYN }}</td>
-        <td>{{ addr.activeYN }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<!-- Alumni Info Form -->
+<form method="post">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.fName.label }} {{ form.fName(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.lName.label }} {{ form.lName(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.email.label }} {{ form.email(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.phone.label }} {{ form.phone(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.DOB.label }} {{ form.DOB(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.gender.label }} {{ form.gender(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.ethnicity.label }} {{ form.ethnicity(class="form-control") }}
+  </div>
+  <div class="mb-3">
+    {{ form.website.label }} {{ form.website(class="form-control") }}
+  </div>
+  {{ form.submit(class="btn btn-primary") }}
+</form>
 
-  {% if session.perms.insert == 'Y' %}
-    <a class="btn btn-primary" href="{{ url_for('address.add_address', alumniID=alumnus.alumniID) }}">
-      Add New Address
-    </a>
-  {% endif %}
+{% if alumnus %}
+<hr>
+<h3>Linked Data</h3>
+
+<!-- Addresses Section -->
+<h4 class="mt-4">Addresses</h4>
+{% if alumnus.addresses %}
+  <ul class="list-group mb-3">
+    {% for addr in alumnus.addresses %}
+      <li class="list-group-item">
+        <a href="{{ url_for('address.view_address', addressID=addr.addressID) }}">
+          {{ addr.address }}, {{ addr.city }}, {{ addr.state }} {{ addr.zipCode }}
+        </a>
+        (Primary: {{ addr.primaryYN }}, Active: {{ addr.activeYN }})
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No addresses on record.</p>
 {% endif %}
+{% if session.perms.insert == 'Y' %}
+  <a class="btn btn-secondary mb-3" href="{{ url_for('address.add_address') }}">Add New Address</a>
+{% endif %}
+
+<!-- Degrees Section -->
+<h4 class="mt-4">Degrees</h4>
+{% if alumnus.degrees %}
+  <ul class="list-group mb-3">
+    {% for degree in alumnus.degrees %}
+      <li class="list-group-item">
+        <a href="{{ url_for('degree.view_degree', degreeID=degree.degreeID) }}">
+          {{ degree.major }} - {{ degree.minor }} from {{ degree.university }}
+        </a>
+        (Graduated: {{ degree.graduationDate }})
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No degrees on record.</p>
+{% endif %}
+{% if session.perms.insert == 'Y' %}
+  <a class="btn btn-secondary mb-3" href="{{ url_for('degree.add_degree') }}">Add New Degree</a>
+{% endif %}
+
+<!-- Employment Section -->
+<h4 class="mt-4">Employment</h4>
+{% if alumnus.employments %}
+  <ul class="list-group mb-3">
+    {% for emp in alumnus.employments %}
+      <li class="list-group-item">
+        <a href="{{ url_for('employment.view_employment', EID=emp.EID) }}">
+          {{ emp.company }} - {{ emp.jobTitle }}
+        </a>
+        (Current: {{ emp.currentYN }})
+        {% if emp.startDate %} | Start: {{ emp.startDate }}{% endif %}
+        {% if emp.endDate %} | End: {{ emp.endDate }}{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No employment records.</p>
+{% endif %}
+{% if session.perms.insert == 'Y' %}
+  <a class="btn btn-secondary mb-3" href="{{ url_for('employment.add_employment') }}">Add New Employment</a>
+{% endif %}
+
+<!-- Donations Section -->
+<h4 class="mt-4">Donations</h4>
+{% if alumnus.donations %}
+  <ul class="list-group mb-3">
+    {% for donation in alumnus.donations %}
+      <li class="list-group-item">
+        <a href="{{ url_for('donation.view_donation', donationID=donation.donationID) }}">
+          ${{ donation.amount }} on {{ donation.donationDate }}
+        </a>
+        - {{ donation.reason }}
+        {% if donation.description %}<br>{{ donation.description }}{% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No donations recorded.</p>
+{% endif %}
+{% if session.perms.insert == 'Y' %}
+  <a class="btn btn-secondary mb-3" href="{{ url_for('donation.add_donation') }}">Add New Donation</a>
+{% endif %}
+
+<!-- Skills Section -->
+<h4 class="mt-4">Skills</h4>
+{% if alumnus.skills %}
+  <ul class="list-group mb-3">
+    {% for skill in alumnus.skills %}
+      <li class="list-group-item">
+        <a href="{{ url_for('skillset.view_skillset', SID=skill.SID) }}">
+          {{ skill.skillName }} - {{ skill.proficiency }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No skills recorded.</p>
+{% endif %}
+{% if session.perms.insert == 'Y' %}
+  <a class="btn btn-secondary mb-3" href="{{ url_for('skillset.add_skillset') }}">Add New Skill</a>
+{% endif %}
+{% endif %}
+
 {% endblock %}

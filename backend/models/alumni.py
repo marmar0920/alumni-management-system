@@ -25,14 +25,25 @@ class Alumni(db.Model):
     deceasedDT = db.Column(db.Date)
     deceasedNotes = db.Column(db.Text)
 
-    # Relationships (strings avoid import errors)
-    addresses = db.relationship('Address', backref='alumnus', cascade='all, delete-orphan')
-    degrees = db.relationship('Degree', backref='alumnus', cascade='all, delete-orphan')
-    employments = db.relationship('Employment', backref='alumnus', cascade='all, delete-orphan')
-    donations = db.relationship('Donation', backref='alumnus', cascade='all, delete-orphan')
-    skills = db.relationship('Skillset', backref='alumnus', cascade='all, delete-orphan')
-    sentTo = db.relationship('SentTo', back_populates='alumni')
+    # Relationships
+    addresses = db.relationship(
+        'Address', backref='alumnus', cascade='all, delete-orphan'
+    )
+    degrees = db.relationship(
+        'Degree', backref='alumnus', cascade='all, delete-orphan'
+    )
+    employments = db.relationship(
+        'Employment', backref='alumnus', cascade='all, delete-orphan'
+    )
+    donations = db.relationship(
+        'Donation', backref='alumnus', cascade='all, delete-orphan'
+    )
+    skills = db.relationship(
+        'Skillset', backref='alumnus', cascade='all, delete-orphan'
+    )
+    sentTo = db.relationship(
+        'SentTo', back_populates='alumni', cascade='all, delete-orphan'
+    )
 
     def __repr__(self):
         return f"<Alumni {self.alumniID} - {self.fName} {self.lName}>"
-
