@@ -21,22 +21,28 @@ def view_address(addressID):
     address = Address.query.get_or_404(addressID)
     return render_template('address_view.html', address=address)
 
-@address_bp.route('/add', methods=['GET', 'POST'])
-def add_address():
+@address_bp.route('/add/<int:alumniID>', methods=['GET', 'POST'])
+def add_address(alumniID):
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')
-        return redirect(url_for('address.list_addresses'))
+        return redirect(url_for('alumni.list_alumni'))
+
     form = AddressForm()
     if form.validate_on_submit():
-        new_address = Address(**{
-            f: getattr(form, f).data
-            for f in form.data
-            if f not in ('csrf_token', 'submit')
-        })
+        new_address = Address(
+            alumniID=alumniID,
+            address=form.address.data,
+            city=form.city.data,
+            state=form.state.data,
+            zipCode=form.zipCode.data,
+            activeYN=form.activeYN.data,
+            primaryYN=form.primaryYN.data
+        )
         db.session.add(new_address)
         db.session.commit()
         flash('Address added successfully', 'success')
-        return redirect(url_for('address.list_addresses'))
+        return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
+
     return render_template('address_form.html', form=form)
 
 @address_bp.route('/edit/<int:addressID>', methods=['GET', 'POST'])
