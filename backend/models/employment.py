@@ -8,7 +8,7 @@ class Employment(db.Model):
     company = db.Column(db.String(100))
     city = db.Column(db.String(50))
     state = db.Column(db.String(2))
-    zipCode = db.Column(db.String(10))
+    zip = db.Column(db.String(10))
     jobTitle = db.Column(db.String(100))
     startDate = db.Column(db.Date)
     endDate = db.Column(db.Date)
