@@ -1,13 +1,16 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SelectField, SubmitField
+from wtforms import StringField, DateField, SelectField, SubmitField, IntegerField
 from wtforms.validators import DataRequired, Length
 
 class EmploymentForm(FlaskForm):
-    companyName = StringField('Company Name', validators=[DataRequired(), Length(max=100)])
+    alumniID = IntegerField('Alumni ID', validators=[DataRequired()])
+    company = StringField('Company', validators=[DataRequired(), Length(max=100)])
+    city = StringField('City', validators=[Length(max=50)])
+    state = StringField('State', validators=[Length(max=2)])
+    zipCode = StringField('Zip Code', validators=[Length(max=10)])
     jobTitle = StringField('Job Title', validators=[DataRequired(), Length(max=100)])
-    startDate = DateField('Start Date', format='%Y-%m-%d', validators=[DataRequired()])
+    startDate = DateField('Start Date', format='%Y-%m-%d')
     endDate = DateField('End Date', format='%Y-%m-%d')
-    currentYN = SelectField('Current?', choices=[('Y', 'Yes'), ('N', 'No')], validators=[DataRequired()])
-    primaryYN = SelectField('Primary?', choices=[('Y', 'Yes'), ('N', 'No')], validators=[DataRequired()])
+    currentYN = SelectField('Is Current?', choices=[('Y', 'Yes'), ('N', 'No')], validators=[DataRequired()])
     submit = SubmitField('Save')
 

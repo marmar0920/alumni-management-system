@@ -5,15 +5,14 @@ class Employment(db.Model):
 
     EID = db.Column(db.Integer, primary_key=True)
     alumniID = db.Column(db.Integer, db.ForeignKey('alumni.alumniID'))
-    company = db.Column(db.String(50), nullable=False)
+    company = db.Column(db.String(100))
     city = db.Column(db.String(50))
     state = db.Column(db.String(2))
-    zip = db.Column(db.String(10))
-    jobTitle = db.Column(db.String(20))
+    zipCode = db.Column(db.String(10))
+    jobTitle = db.Column(db.String(100))
     startDate = db.Column(db.Date)
     endDate = db.Column(db.Date)
-    currentYN = db.Column(db.String(1))
-    notes = db.Column(db.String(100))
+    currentYN = db.Column(db.String(100))
 
     def __repr__(self):
         return f'<Employment {self.company} - {self.jobTitle}>'

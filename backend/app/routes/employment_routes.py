@@ -26,13 +26,22 @@ def add_employment():
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')
         return redirect(url_for('employment.list_employments'))
+
+    alumniID = request.args.get('alumniID', type=int)
     form = EmploymentForm()
+    if alumniID:
+        form.alumniID.data = alumniID
+
     if form.validate_on_submit():
-        new_employment = Employment(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})
+        new_employment = Employment(**{
+            f: getattr(form, f).data
+            for f in form.data
+            if f not in ('csrf_token', 'submit')
+        })
         db.session.add(new_employment)
         db.session.commit()
         flash('Employment added successfully', 'success')
-        return redirect(url_for('employment.list_employments'))
+        return redirect(url_for('alumni.edit_alumni', alumniID=new_employment.alumniID))
     return render_template('employment_form.html', form=form)
 
 @employment_bp.route('/edit/<int:EID>', methods=['GET', 'POST'])
@@ -46,7 +55,7 @@ def edit_employment(EID):
         form.populate_obj(employment)
         db.session.commit()
         flash('Employment updated successfully', 'success')
-        return redirect(url_for('employment.list_employments'))
+        return redirect(url_for('alumni.edit_alumni', alumniID=employment.alumniID))
     return render_template('employment_form.html', form=form)
 
 @employment_bp.route('/delete/<int:EID>', methods=['POST'])
@@ -55,7 +64,9 @@ def delete_employment(EID):
         flash('Unauthorized', 'warning')
         return redirect(url_for('employment.list_employments'))
     employment = Employment.query.get_or_404(EID)
+    alumniID = employment.alumniID
     db.session.delete(employment)
     db.session.commit()
     flash('Employment deleted successfully', 'success')
-    return redirect(url_for('employment.list_employments'))
+    return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
+    db.session.commit()
