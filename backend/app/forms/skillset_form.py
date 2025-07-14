@@ -1,11 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SelectField, SubmitField
+from wtforms import IntegerField, StringField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length
 
 class SkillsetForm(FlaskForm):
-    skillName = StringField('Skill Name', validators=[DataRequired(), Length(max=100)])
-    proficiencyLevel = StringField('Proficiency Level', validators=[Length(max=50)])
-    endorsementYN = SelectField('Endorsed?', choices=[('Y', 'Yes'), ('N', 'No')])
-    dateReceived = DateField('Date Received', format='%Y-%m-%d')
+    alumniID = IntegerField('Alumni ID', validators=[DataRequired()])
+    skill = StringField('Skill', validators=[DataRequired(), Length(max=50)])
+    proficiency = SelectField('Proficiency', choices=[
+        ('Beginner', 'Beginner'),
+        ('Intermediate', 'Intermediate'),
+        ('Advanced', 'Advanced')
+    ], validators=[DataRequired()])
     submit = SubmitField('Save')
-

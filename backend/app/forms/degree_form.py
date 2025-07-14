@@ -1,12 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SelectField, SubmitField
+from wtforms import StringField, DateField, IntegerField, SubmitField
 from wtforms.validators import DataRequired, Length
 
 class DegreeForm(FlaskForm):
-    degreeType = StringField('Degree Type', validators=[DataRequired(), Length(max=50)])
-    institution = StringField('Institution', validators=[DataRequired(), Length(max=100)])
-    major = StringField('Major', validators=[DataRequired(), Length(max=100)])
-    conferredDate = DateField('Conferred Date', format='%Y-%m-%d', validators=[DataRequired()])
-    primaryYN = SelectField('Primary?', choices=[('Y', 'Yes'), ('N', 'No')], validators=[DataRequired()])
+    alumniID = IntegerField('Alumni ID', validators=[DataRequired()])
+    major = StringField('Major', validators=[DataRequired(), Length(max=50)])
+    minor = StringField('Minor', validators=[Length(max=50)])
+    graduationDate = DateField('Graduation Date', format='%Y-%m-%d')
+    university = StringField('University', validators=[Length(max=100)])
+    city = StringField('City', validators=[Length(max=50)])
+    state = StringField('State', validators=[Length(max=2)])
     submit = SubmitField('Save')
-
