@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, session, flash,
 from backend.models.alumni import Alumni
 from backend.app.forms.alumni_form import AlumniForm
 from backend.utils.db_connect import db
+from sqlalchemy.orm import joinedload
 
 alumni_bp = Blueprint('alumni', __name__, url_prefix='/alumni')
 
@@ -37,7 +38,13 @@ def edit_alumni(alumniID):
         flash('Not allowed', 'warning')
         return redirect(url_for('alumni.list_alumni'))
     
-    alumnus = Alumni.query.get_or_404(alumniID)
+    alumnus = Alumni.query.options(
+    joinedload(Alumni.addresses),
+    joinedload(Alumni.degrees),
+    joinedload(Alumni.employments),
+    joinedload(Alumni.donations),
+    joinedload(Alumni.skills)
+).get_or_404(alumniID)
     form = AlumniForm(obj=alumnus)
     addresses = alumnus.addresses
 
