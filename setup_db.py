@@ -14,7 +14,7 @@ with app.app_context():
     else:
         new_user = User(
             UID='105386',
-            password='MyDogButch2024',
+            password=generate_password_hash('MyDogButch2024'),
             fName='Test',
             lName='User',
             jobDescription='Admin',
@@ -25,4 +25,4 @@ with app.app_context():
         )
         db.session.add(new_user)
         db.session.commit()
-    print("User 105386 created successfully!")
+        print("✅ User 105386 created successfully!")
