@@ -1,6 +1,7 @@
 from run import app
 from backend.utils.db_connect import db
 from backend.models.user import User
+from werkzeug.security import generate_password_hash
 
 with app.app_context():
     print("Creating all database tables (if not exist)...")
