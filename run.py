@@ -10,4 +10,3 @@ def _test_login_template():
 
 if __name__ == "__main__":
     app.run(debug=True)
-# This script initializes the Flask application and sets up a route to test the login template rendering.
