@@ -10,6 +10,8 @@ class SkillsetForm(FlaskForm):
         ('Intermediate', 'Intermediate'),
         ('Advanced', 'Advanced')
     ], validators=[DataRequired()])
+    endorsementYN = SelectField('Endorsed?', choices=[
+        ('Y', 'Yes'),
+        ('N', 'No')
+    ], validators=[DataRequired()])
     submit = SubmitField('Save')
-
-
