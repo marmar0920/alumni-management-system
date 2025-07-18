@@ -8,50 +8,49 @@
     <a href="{{ url_for('employment.add_employment') }}" class="btn btn-primary mb-3">Add New Employment</a>
   {% endif %}
 
-  <table class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th>Company</th>
-        <th>Job Title</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Zip</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Current</th>
-        <th>Notes</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for emp in employments %}
-      <tr>
-        <td>{{ emp.company }}</td>
-        <td>{{ emp.jobTitle }}</td>
-        <td>{{ emp.city or '-' }}</td>
-        <td>{{ emp.state or '-' }}</td>
-        <td>{{ emp.zip or '-' }}</td>
-        <td>{{ emp.startDate or '-' }}</td>
-        <td>{{ emp.endDate or '-' }}</td>
-        <td>{{ emp.currentYN }}</td>
-        <td>{{ emp.notes or '-' }}</td>
-        <td>
-          {% if session.perms.update == 'Y' %}
-            <a href="{{ url_for('employment.edit_employment', EID=emp.EID) }}" class="btn btn-sm btn-warning">Edit</a>
-          {% endif %}
-          {% if session.perms.delete == 'Y' %}
-            <form method="post" action="{{ url_for('employment.delete_employment', EID=emp.EID) }}" style="display:inline">
-              <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-            </form>
-          {% endif %}
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% endblock %}
-{% if employments|length == 0 %}
-  <p>No employment records found.</p>
-{% endif %}
-
+  {% if employments|length == 0 %}
+    <p>No employment records found.</p>
+  {% else %}
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Job Title</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Current</th>
+          <th>Notes</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for emp in employments %}
+        <tr>
+          <td>{{ emp.company }}</td>
+          <td>{{ emp.jobTitle }}</td>
+          <td>{{ emp.city or '-' }}</td>
+          <td>{{ emp.state or '-' }}</td>
+          <td>{{ emp.zip or '-' }}</td>
+          <td>{{ emp.startDate or '-' }}</td>
+          <td>{{ emp.endDate or '-' }}</td>
+          <td>{{ emp.currentYN }}</td>
+          <td>{{ emp.notes or '-' }}</td>
+          <td>
+            {% if session.perms.update == 'Y' %}
+              <a href="{{ url_for('employment.edit_employment', EID=emp.EID) }}" class="btn btn-sm btn-warning">Edit</a>
+            {% endif %}
+            {% if session.perms.delete == 'Y' %}
+              <form method="post" action="{{ url_for('employment.delete_employment', EID=emp.EID) }}" style="display:inline">
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
 {% endblock %}
