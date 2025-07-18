@@ -14,7 +14,7 @@ from backend.app.routes.newsletter_routes import newsletter_bp
 from backend.app.routes.sentto_routes import sentto_bp
 
 def create_app():
-    app = Flask(__name__, template_folder='backend/templates')
+    app = Flask(__name__, template_folder='templates')
     app.config.from_object(Config)
     db.init_app(app)
     # Root route: automatically redirect to alumni list
