@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, StringField, SelectField, SubmitField, DateField
+from wtforms import IntegerField, StringField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length
 
 class SkillsetForm(FlaskForm):
