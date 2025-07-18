@@ -24,4 +24,9 @@ class DegreeForm(FlaskForm):
     university = StringField('University', validators=[Length(max=100)])
     city = StringField('City', validators=[Length(max=50)])
     state = StringField('State', validators=[Length(max=2)])
+    primaryYN = SelectField(
+        'Primary Degree?',
+        choices=[('Y', 'Yes'), ('N', 'No')],
+        validators=[DataRequired()]
+    )
     submit = SubmitField('Save')
