@@ -9,8 +9,8 @@ with app.app_context():
         print("Test user already exists.")
     else:
         new_user = User(
-            UID='testuser',
-            password='testpass',
+            UID='105386',
+            password='MyDogButch2024',
             viewPriveledgeYN='Y',
             insertPriveledgeYN='Y',
             updatePriveledgeYN='Y',
