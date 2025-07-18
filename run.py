@@ -1,6 +1,7 @@
 from backend import create_app
 
 app = create_app()
+print("Template search path:", app.jinja_loader.searchpath)
 
 @app.route("/_test_login_template")
 def _test_login_template():
