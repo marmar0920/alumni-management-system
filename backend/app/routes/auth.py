@@ -26,3 +26,7 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('auth.login'))
+
+@auth_bp.route('/health', methods=['GET'])
+def health():
+    return 'OK', 200
