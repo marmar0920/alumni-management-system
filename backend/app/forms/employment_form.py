@@ -12,5 +12,9 @@ class EmploymentForm(FlaskForm):
     startDate = DateField('Start Date', format='%Y-%m-%d')
     endDate = DateField('End Date', format='%Y-%m-%d')
     currentYN = SelectField('Is Current?', choices=[('Y', 'Yes'), ('N', 'No')], validators=[DataRequired()])
+    
+    primaryYN = SelectField('Primary Employment?', choices=[('Y', 'Yes'), ('N', 'No')], validators=[DataRequired()])
+    
     submit = SubmitField('Save')
+
 
