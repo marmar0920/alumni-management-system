@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}View Address{% endblock %}
+{% block content %}
+  <h2>Address Details</h2>
+  <ul>
+    <li><strong>ID:</strong> {{ address.addressID }}</li>
+    <li><strong>Street:</strong> {{ address.address }}</li>
+    <li><strong>City:</strong> {{ address.city }}</li>
+    <li><strong>State:</strong> {{ address.state }}</li>
+    <li><strong>Zip:</strong> {{ address.zipCode }}</li>
+    <li><strong>Active:</strong> {{ address.activeYN }}</li>
+    <li><strong>Primary:</strong> {{ address.primaryYN }}</li>
+  </ul>
+  <a href="{{ url_for('address.list_addresses') }}" class="btn btn-secondary">Back</a>
+{% endblock %}
