@@ -21,33 +21,34 @@ def view_skillset(SID):
     skillset = Skillset.query.get_or_404(SID)
     return render_template('skillset_view.html', skillset=skillset)
 
-@skillset_bp.route('/add', methods=['GET', 'POST'])
-def add_skillset():
-    if session.get('perms', {}).get('insert') != 'Y':
-        flash('Not allowed', 'warning')
-        return redirect(url_for('skillset.list_skillsets'))
-    form = SkillsetForm()
+@skill_bp.route('/add', methods=['GET', 'POST'])
+def add_skill():
+    form = SkillForm()
     if form.validate_on_submit():
-        new_skillset = Skillset(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})
-        db.session.add(new_skillset)
+        new_skill = Skill(
+            alumniID=form.alumniID.data,
+            skill=form.skill.data,
+            proficiency=form.proficiency.data,
+            description=form.description.data
+        )
+        db.session.add(new_skill)
         db.session.commit()
-        flash('Skillset added successfully', 'success')
-        return redirect(url_for('skillset.list_skillsets'))
-    return render_template('skillset_form.html', form=form)
+        flash('Skill added successfully!', 'success')
+        return redirect(url_for('alumni.edit_alumni', alumniID=form.alumniID.data))
+    return render_template('skill_form.html', form=form)
 
-@skillset_bp.route('/edit/<int:SID>', methods=['GET', 'POST'])
-def edit_skillset(SID):
-    if session.get('perms', {}).get('update') != 'Y':
-        flash('Unauthorized', 'warning')
-        return redirect(url_for('skillset.list_skillsets'))
-    skillset = Skillset.query.get_or_404(SID)
-    form = SkillsetForm(obj=skillset)
+@skill_bp.route('/edit/<int:SID>', methods=['GET', 'POST'])
+def edit_skill(SID):
+    skill = Skill.query.get_or_404(SID)
+    form = SkillForm(obj=skill)
     if form.validate_on_submit():
-        form.populate_obj(skillset)
+        skill.skill = form.skill.data
+        skill.proficiency = form.proficiency.data
+        skill.description = form.description.data
         db.session.commit()
-        flash('Skillset updated successfully', 'success')
-        return redirect(url_for('skillset.list_skillsets'))
-    return render_template('skillset_form.html', form=form)
+        flash('Skill updated successfully!', 'success')
+        return redirect(url_for('alumni.edit_alumni', alumniID=skill.alumniID))
+    return render_template('skill_form.html', form=form)
 
 @skillset_bp.route('/delete/<int:SID>', methods=['POST'])
 def delete_skillset(SID):
