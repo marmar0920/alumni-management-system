@@ -129,7 +129,7 @@
   <ul class="list-group mb-3">
     {% for skill in alumnus.skills %}
       <li class="list-group-item">
-        <a href="{{ url_for('skillset.view_skillset', SID=skill.SID) }}">
+        <a href="{{ url_for('skillset.view_skill', SID=skill.SID) }}">
           {{ skill.skillName }} - {{ skill.proficiency }}
         </a>
       </li>
