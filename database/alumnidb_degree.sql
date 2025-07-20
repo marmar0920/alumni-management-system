@@ -16,30 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `newsletter`
+-- Table structure for table `degree`
 --
 
-DROP TABLE IF EXISTS `newsletter`;
+DROP TABLE IF EXISTS `degree`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `newsletter` (
-  `NID` int NOT NULL,
-  `newsDate` date NOT NULL,
-  `headline` varchar(200) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
-  `link` varchar(200) DEFAULT NULL,
-  `fileLoc` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`NID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `degree` (
+  `degreeID` int NOT NULL AUTO_INCREMENT,
+  `alumniID` int DEFAULT NULL,
+  `major` varchar(50) NOT NULL,
+  `minor` varchar(50) DEFAULT NULL,
+  `graduationDT` date DEFAULT NULL,
+  `university` varchar(100) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `state` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`degreeID`),
+  KEY `alumniID` (`alumniID`),
+  CONSTRAINT `degree_ibfk_1` FOREIGN KEY (`alumniID`) REFERENCES `alumni` (`alumniID`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `newsletter`
+-- Dumping data for table `degree`
 --
 
-LOCK TABLES `newsletter` WRITE;
-/*!40000 ALTER TABLE `newsletter` DISABLE KEYS */;
-/*!40000 ALTER TABLE `newsletter` ENABLE KEYS */;
+LOCK TABLES `degree` WRITE;
+/*!40000 ALTER TABLE `degree` DISABLE KEYS */;
+INSERT INTO `degree` VALUES (100,201,'MIS','Cybersecurity','2023-05-09','Kennesaw State University','Kennesaw','GA');
+/*!40000 ALTER TABLE `degree` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

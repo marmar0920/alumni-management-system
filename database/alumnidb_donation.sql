@@ -16,30 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `newsletter`
+-- Table structure for table `donation`
 --
 
-DROP TABLE IF EXISTS `newsletter`;
+DROP TABLE IF EXISTS `donation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `newsletter` (
-  `NID` int NOT NULL,
-  `newsDate` date NOT NULL,
-  `headline` varchar(200) DEFAULT NULL,
+CREATE TABLE `donation` (
+  `donationID` int NOT NULL AUTO_INCREMENT,
+  `alumniID` int DEFAULT NULL,
+  `donationAmt` int DEFAULT NULL,
+  `donationDT` date NOT NULL,
+  `reason` varchar(200) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
-  `link` varchar(200) DEFAULT NULL,
-  `fileLoc` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`NID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`donationID`),
+  KEY `alumniID` (`alumniID`),
+  CONSTRAINT `donation_ibfk_1` FOREIGN KEY (`alumniID`) REFERENCES `alumni` (`alumniID`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `newsletter`
+-- Dumping data for table `donation`
 --
 
-LOCK TABLES `newsletter` WRITE;
-/*!40000 ALTER TABLE `newsletter` DISABLE KEYS */;
-/*!40000 ALTER TABLE `newsletter` ENABLE KEYS */;
+LOCK TABLES `donation` WRITE;
+/*!40000 ALTER TABLE `donation` DISABLE KEYS */;
+INSERT INTO `donation` VALUES (100,201,500,'2023-01-08','Campus initiative','A donation of $500 was made for Memorial Day initiatives.');
+/*!40000 ALTER TABLE `donation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
