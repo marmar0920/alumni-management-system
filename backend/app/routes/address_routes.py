@@ -28,8 +28,11 @@ def add_address(alumniID):
         flash('Not allowed', 'warning')
         return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
     
+    
     form = AddressForm()
     if form.validate_on_submit():
+        if form.primaryYN.data == 'Y':
+            Address.query.filter_by(alumniID=alumniID).update({'primaryYN': 'N'})
         new_address = Address(
             alumniID=alumniID,
             address=form.address.data,
