@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Skillset Form{% endblock %}
 {% block content %}
-  <h2>Skillset</h2>
+  <h2>Skill</h2>
   <form method="post">
     {{ form.csrf_token }}
     {{ form.skillName.label }} {{ form.skillName(class="form-control mb-2") }}

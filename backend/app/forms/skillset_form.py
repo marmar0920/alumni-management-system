@@ -14,5 +14,4 @@ class SkillsetForm(FlaskForm):
         ('Y', 'Yes'),
         ('N', 'No')
     ], validators=[DataRequired()])
-    dateReceived = DateField('Date Received', format='%Y-%m-%d')
     submit = SubmitField('Save')
