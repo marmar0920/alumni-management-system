@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Employment Details{% endblock %}
+{% block content %}
+  <h2>Employment Details</h2>
+  <ul>
+    <li>Company: {{ employment.company }}</li>
+    <li>Job Title: {{ employment.jobTitle }}</li>
+    <li>City: {{ employment.city }}</li>
+    <li>State: {{ employment.state }}</li>
+    <li>Zip: {{ employment.zip }}</li>
+    <li>Start Date: {{ employment.startDate }}</li>
+    <li>End Date: {{ employment.endDate }}</li>
+    <li>Current: {{ employment.currentYN }}</li>
+    <li>Notes: {{ employment.notes }}</li>
+  </ul>
+  <a href="{{ url_for('employment.list_employments') }}">Back to Employment List</a>
+{% endblock %}
