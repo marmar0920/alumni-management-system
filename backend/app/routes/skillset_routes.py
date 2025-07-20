@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, session, flash, request
+from backend.app.forms import skillset_form
+from backend.models import skillset
 from backend.models.skillset import Skillset
 from backend.utils.db_connect import db
 from backend.app.forms.skillset_form import SkillsetForm
@@ -23,9 +25,9 @@ def view_skillset(SID):
 
 @skillset_bp.route('/add', methods=['GET', 'POST'])
 def add_skill():
-    form = SkillForm()
+    form = SkillsetForm()
     if form.validate_on_submit():
-        new_skill = Skill(
+        new_skill = skillset(
             alumniID=form.alumniID.data,
             skill=form.skill.data,
             proficiency=form.proficiency.data,
@@ -39,8 +41,8 @@ def add_skill():
 
 @skillset_bp.route('/edit/<int:SID>', methods=['GET', 'POST'])
 def edit_skill(SID):
-    skill = Skill.query.get_or_404(SID)
-    form = SkillForm(obj=skill)
+    skill = skillset_form.query.get_or_404(SID)
+    form = SkillsetForm(obj=skill)
     if form.validate_on_submit():
         skill.skill = form.skill.data
         skill.proficiency = form.proficiency.data
