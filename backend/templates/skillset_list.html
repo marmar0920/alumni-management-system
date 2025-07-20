@@ -3,7 +3,7 @@
 {% block content %}
   <h2>Skills</h2>
   {% if session.perms.insert == 'Y' %}
-    <a href="{{ url_for('skillset.add_skillset') }}" class="btn btn-primary mb-3">Add New Skill</a>
+    <a href="{{ url_for('skillset.add_skill') }}" class="btn btn-primary mb-3">Add New Skill</a>
   {% endif %}
   <table class="table table-striped">
     <thead>
@@ -20,10 +20,10 @@
         <td>{{ skill.proficiency }}</td>
         <td>
           {% if session.perms.update == 'Y' %}
-            <a href="{{ url_for('skillset.edit_skillset', SID=skill.SID) }}" class="btn btn-sm btn-warning">Edit</a>
+            <a href="{{ url_for('skillset.edit_skill', SID=skill.SID) }}" class="btn btn-sm btn-warning">Edit</a>
           {% endif %}
           {% if session.perms.delete == 'Y' %}
-            <form method="post" action="{{ url_for('skillset.delete_skillset', SID=skill.SID) }}" style="display:inline">
+            <form method="post" action="{{ url_for('skillset.delete_skill', SID=skill.SID) }}" style="display:inline">
               <button type="submit" class="btn btn-sm btn-danger">Delete</button>
             </form>
           {% endif %}
