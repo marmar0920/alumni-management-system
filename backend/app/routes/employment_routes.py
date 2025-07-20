@@ -23,25 +23,40 @@ def view_employment(EID):
 
 @employment_bp.route('/add', methods=['GET', 'POST'])
 def add_employment():
+    # Make sure user has permission to insert
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')
         return redirect(url_for('employment.list_employments'))
 
     alumniID = request.args.get('alumniID', type=int)
     form = EmploymentForm()
+
+   
     if alumniID:
         form.alumniID.data = alumniID
 
     if form.validate_on_submit():
-        new_employment = Employment(**{
-            f: getattr(form, f).data
-            for f in form.data
-            if f not in ('csrf_token', 'submit')
-        })
+        if form.currentYN.data == 'Y':
+            Employment.query.filter_by(alumniID=form.alumniID.data, currentYN='Y').update({'currentYN': 'N'})
+
+        new_employment = Employment(
+            alumniID=form.alumniID.data,
+            company=form.company.data,
+            city=form.city.data,
+            state=form.state.data,
+            zip=form.zip.data,
+            jobTitle=form.jobTitle.data,
+            startDate=form.startDate.data,
+            endDate=form.endDate.data,
+            currentYN=form.currentYN.data,
+            notes=form.notes.data
+        )
+
         db.session.add(new_employment)
         db.session.commit()
         flash('Employment added successfully', 'success')
-        return redirect(url_for('alumni.edit_alumni', alumniID=new_employment.alumniID))
+        return redirect(url_for('alumni.edit_alumni', alumniID=form.alumniID.data))
+
     return render_template('employment_form.html', form=form)
 
 @employment_bp.route('/edit/<int:EID>', methods=['GET', 'POST'])
@@ -70,3 +85,4 @@ def delete_employment(EID):
     flash('Employment deleted successfully', 'success')
     return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
     db.session.commit()
+    
