@@ -22,7 +22,6 @@
           <th>Start Date</th>
           <th>End Date</th>
           <th>Current</th>
-          <th>Notes</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -37,7 +36,6 @@
           <td>{{ emp.startDate or '-' }}</td>
           <td>{{ emp.endDate or '-' }}</td>
           <td>{{ emp.currentYN }}</td>
-          <td>{{ emp.notes or '-' }}</td>
           <td>
             {% if session.perms.update == 'Y' %}
               <a href="{{ url_for('employment.edit_employment', EID=emp.EID) }}" class="btn btn-sm btn-warning">Edit</a>
