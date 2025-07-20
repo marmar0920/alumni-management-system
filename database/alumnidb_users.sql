@@ -42,6 +42,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('105386','MyDogButch2024','Aaron','French','Professor','Y','Y','Y','Y'),('105387','Icantview2025','View','Test',NULL,'N','N','N','N'),('105388','Icantinsert2025','Insert','Test',NULL,'Y','N','N','N'),('105389','Icantupdate2025','Update','Test',NULL,'Y','Y','N','N'),('105390','Icantdelete2025','Delete','Test',NULL,'Y','Y','Y','N');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-08 11:01:50
+-- Dump completed on 2025-07-19 20:52:33
