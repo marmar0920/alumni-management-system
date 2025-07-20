@@ -49,7 +49,7 @@ def add_employment():
             startDate=form.startDate.data,
             endDate=form.endDate.data,
             currentYN=form.currentYN.data,
-            notes=form.notes.data
+            
         )
 
         db.session.add(new_employment)
