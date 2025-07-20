@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, IntegerField, SubmitField, SelectField
+from wtforms import StringField, DateField, IntegerField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length
 
 class DegreeForm(FlaskForm):
@@ -20,7 +20,8 @@ class DegreeForm(FlaskForm):
     minor = StringField('Minor', validators=[Length(max=50)])
     graduationDate = DateField('Graduation Date', format='%Y-%m-%d')
     conferredDate = DateField('Conferred Date', format='%Y-%m-%d')
-    instiution = StringField('Instiution', validators=[Length(max=100)])
+    institution = StringField('Institution', validators=[Length(max=100)])   # <-- MAKE SURE THIS IS PRESENT
+    university = StringField('University', validators=[Length(max=100)])
     city = StringField('City', validators=[Length(max=50)])
     state = StringField('State', validators=[Length(max=2)])
     primaryYN = SelectField(
@@ -28,4 +29,4 @@ class DegreeForm(FlaskForm):
         choices=[('Y', 'Yes'), ('N', 'No')],
         validators=[DataRequired()]
     )
-    submit = SubmitField('Save')#
+    submit = SubmitField('Save')
