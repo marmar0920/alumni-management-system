@@ -94,7 +94,7 @@
 {% else %}
   <p>No employment records.</p>
 {% endif %}
-{% if session.perms.insert == 'Y' %}
+{% if session.perms.insert == 'Y' or item == 'N' %}
   <a class="btn btn-secondary mb-3" href="{{ url_for('employment.add_employment', alumniID=alumnus.alumniID) }}">
     Add New Employment
   </a>
