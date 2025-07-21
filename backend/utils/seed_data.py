@@ -70,17 +70,7 @@ def seed_all_data():
         ])
         print("Seeded Donations.")
 
-    # Seed Skillsets
-    if not Skillset.query.first():
-        db.session.add_all([
-            Skillset(
-                SID=100,
-                alumniID=201,
-                skill='Figma',
-                proficiency='Beginner'
-            )
-        ])
-        print("Seeded Skillsets.")
+
 
     # Commit once at the end
     db.session.commit()

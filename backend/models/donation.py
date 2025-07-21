@@ -11,5 +11,5 @@ class Donation(db.Model):
     description = db.Column(db.String(200))
 
     def __repr__(self):
-        return f'<Donation {self.donationAmount}>'
+        return f'<Donation {self.donationAmt}>'
 

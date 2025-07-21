@@ -28,7 +28,11 @@ def add_donation():
         return redirect(url_for('donation.list_donations'))
     form = DonationForm()
     if form.validate_on_submit():
-        new_donation = Donation(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})
+        new_donation = Donation(**{
+        f: getattr(form, f).data 
+        for f in form.data 
+        if f not in ('csrf_token', 'submit')
+        })
         db.session.add(new_donation)
         db.session.commit()
         flash('Donation added successfully', 'success')

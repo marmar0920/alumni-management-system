@@ -8,6 +8,8 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <th>ID</th>
+        <th>Alumni ID</th>
         <th>Major</th>
         <th>Minor</th>
         <th>Graduation Date</th>
@@ -18,9 +20,11 @@
     <tbody>
       {% for deg in degrees %}
       <tr>
+        <td>{{ deg.degreeID }}</td>
+        <td>{{ deg.alumniID }}</td>
         <td>{{ deg.major }}</td>
         <td>{{ deg.minor }}</td>
-        <td>{{ deg.gradDate }}</td>
+        <td>{{ deg.graduationDT }}</td>
         <td>{{ deg.university }}</td>
         <td>
           {% if session.perms.update == 'Y' %}

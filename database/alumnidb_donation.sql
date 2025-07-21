@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
--- Host: localhost    Database: alumnidb
+-- Host: 127.0.0.1    Database: alumnidb
 -- ------------------------------------------------------
 -- Server version	9.3.0
 
@@ -32,7 +32,7 @@ CREATE TABLE `donation` (
   PRIMARY KEY (`donationID`),
   KEY `alumniID` (`alumniID`),
   CONSTRAINT `donation_ibfk_1` FOREIGN KEY (`alumniID`) REFERENCES `alumni` (`alumniID`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `donation` (
 
 LOCK TABLES `donation` WRITE;
 /*!40000 ALTER TABLE `donation` DISABLE KEYS */;
-INSERT INTO `donation` VALUES (100,201,500,'2023-01-08','Campus initiative','A donation of $500 was made for Memorial Day initiatives.');
+INSERT INTO `donation` VALUES (100,211,500,'2023-01-08','',''),(101,220,250,'2023-05-10','',''),(102,260,1000,'2022-03-22','',''),(103,279,500,'2022-06-24','',''),(104,297,10000,'2022-11-03','',''),(105,306,2500,'2023-07-06','',''),(106,320,5000,'2023-02-05','',''),(107,323,750,'2023-10-19','',''),(109,204,23223232,'2000-10-10','yet','yet');
 /*!40000 ALTER TABLE `donation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-19 20:52:33
+-- Dump completed on 2025-07-21 16:44:59

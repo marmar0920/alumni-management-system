@@ -22,19 +22,24 @@ def view_address(addressID):
     address = Address.query.get_or_404(addressID)
     return render_template('address_view.html', address=address)
 
-@address_bp.route('/add/<int:alumniID>', methods=['GET', 'POST'])
-def add_address(alumniID):
+@address_bp.route('/add', methods=['GET', 'POST'])
+def add_address():
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')
-        return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
-    
-    
+        return redirect(url_for('address.list_addresses'))
+        
+    alumniID = request.args.get('alumniID', type=int)
     form = AddressForm()
+
+    if alumniID:
+        form.alumniID.data = alumniID
+
     if form.validate_on_submit():
         if form.primaryYN.data == 'Y':
-            Address.query.filter_by(alumniID=alumniID).update({'primaryYN': 'N'})
+            Address.query.filter_by(alumniID=form.alumniID.data, primaryYN='Y').update({'primaryYN': 'N'})
+
         new_address = Address(
-            alumniID=alumniID,
+            alumniID=form.alumniID.data,
             address=form.address.data,
             city=form.city.data,
             state=form.state.data,

@@ -125,12 +125,12 @@
 
 <!-- Skills Section -->
 <h4 class="mt-4">Skills</h4>
-{% if alumnus.skills %}
+{% if alumnus.skillset %}
   <ul class="list-group mb-3">
-    {% for skill in alumnus.skills %}
+    {% for skill in alumnus.skillset %}
       <li class="list-group-item">
-        <a href="{{ url_for('skillset.view_skill', SID=skill.SID) }}">
-          {{ skill.skillName }} - {{ skill.proficiency }}
+        <a href="{{ url_for('skillset.view_skillset', SID=skill.SID) }}">
+          {{ skillset.skill }} - {{ skillset.proficiency }}
         </a>
       </li>
     {% endfor %}

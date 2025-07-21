@@ -24,10 +24,10 @@ def view_skillset(SID):
     return render_template('skillset_view.html', skillset=skillset)
 
 @skillset_bp.route('/add', methods=['GET', 'POST'])
-def add_skill():
+def add_skillset():
     form = SkillsetForm()
     if form.validate_on_submit():
-        new_skill = skillset(
+        new_skill = Skillset(
             alumniID=form.alumniID.data,
             skill=form.skill.data,
             proficiency=form.proficiency.data,
@@ -37,7 +37,7 @@ def add_skill():
         db.session.commit()
         flash('Skill added successfully!', 'success')
         return redirect(url_for('alumni.edit_alumni', alumniID=form.alumniID.data))
-    return render_template('skill_form.html', form=form)
+    return render_template('skillset_form.html', form=form)
 
 @skillset_bp.route('/edit/<int:SID>', methods=['GET', 'POST'])
 def edit_skill(SID):
@@ -50,7 +50,7 @@ def edit_skill(SID):
         db.session.commit()
         flash('Skill updated successfully!', 'success')
         return redirect(url_for('alumni.edit_alumni', alumniID=skill.alumniID))
-    return render_template('skill_form.html', form=form)
+    return render_template('skillset_form.html', form=form)
 
 @skillset_bp.route('/delete/<int:SID>', methods=['POST'])
 def delete_skillset(SID):

@@ -2,6 +2,9 @@
 {% block title %}Donation List{% endblock %}
 {% block content %}
   <h2>Donations</h2>
+    {% if session.perms.insert == 'Y' %}
+    <a href="{{ url_for('donation.add_donation') }}" class="btn btn-primary mb-3">Add New Donation</a>
+    {% endif %}
   <table class="table table-striped">
     <thead>
       <tr>
@@ -19,7 +22,7 @@
         <tr>
           <td>{{ d.donationID }}</td>
           <td>{{ d.alumniID }}</td>
-          <td>${{ d.donationAmount }}</td>
+          <td>${{ d.donationAmt }}</td>
           <td>{{ d.donationDT }}</td>
           <td>{{ d.reason }}</td>
           <td>{{ d.description }}</td>

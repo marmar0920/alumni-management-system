@@ -7,7 +7,13 @@
   {% endif %}
   <table class="table table-striped">
     <thead>
-      <tr><th>ID</th><th>Name</th><th>Email</th><th>Actions</th></tr>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+      </tr>
     </thead>
     <tbody>
       {% for a in alumni %}
@@ -15,6 +21,7 @@
           <td>{{ a.alumniID }}</td>
           <td>{{ a.fName }} {{ a.lName }}</td>
           <td>{{ a.email }}</td>
+          <td>{{ a.phone }}</td>
           <td>
             {% if session.perms.update %}
               <a href="{{ url_for('alumni.edit_alumni', alumniID=a.alumniID) }}" class="btn btn-sm btn-warning">Edit</a>

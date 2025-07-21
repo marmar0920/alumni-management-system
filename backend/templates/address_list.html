@@ -2,25 +2,34 @@
 {% block title %}Address List{% endblock %}
 {% block content %}
   <h2>Addresses</h2>
+  {% if session.perms.insert == 'Y' %}
+    <a href="{{ url_for('address.add_address') }}" class="btn btn-primary mb-3">Add New Address</a>
+  {% endif %}
   <table class="table table-striped">
     <thead>
       <tr>
         <th>ID</th>
+        <th>Alumni ID</th>
         <th>Address</th>
         <th>City</th>
         <th>State</th>
         <th>Zip</th>
         <th>Actions</th>
+        <th>Primary</th>
+        <th>Active</th>
       </tr>
     </thead>
     <tbody>
       {% for a in addresses %}
         <tr>
           <td>{{ a.addressID }}</td>
+          <td>{{ a.alumniID }}</td>
           <td>{{ a.address }}</td>
           <td>{{ a.city }}</td>
           <td>{{ a.state }}</td>
           <td>{{ a.zipCode }}</td>
+          <td>{{ a.activeYN }}</td>
+          <td>{{ a.primaryYN }}</td>
           <td>
             {% if session.perms.update == 'Y' %}
               <a href="{{ url_for('address.edit_address', addressID=a.addressID) }}" class="btn btn-sm btn-warning">Edit</a>

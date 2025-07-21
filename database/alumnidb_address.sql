@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
 --
--- Host: localhost    Database: alumnidb
+-- Host: 127.0.0.1    Database: alumnidb
 -- ------------------------------------------------------
 -- Server version	9.3.0
 
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-07-19 20:52:33
+-- Dump completed on 2025-07-21 16:44:59
