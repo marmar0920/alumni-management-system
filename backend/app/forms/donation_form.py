@@ -8,4 +8,5 @@ class DonationForm(FlaskForm):
     donationDT = DateField('Donation Date', format='%Y-%m-%d', validators=[DataRequired()])
     reason = StringField('Reason')
     description = StringField('Description')
+    recurringYN = SelectField('Recurring?', choices=[('Y', 'Yes'), ('N', 'No')], validators=[DataRequired()])
     submit = SubmitField('Save')
