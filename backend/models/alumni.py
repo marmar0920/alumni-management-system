@@ -25,14 +25,13 @@ class Alumni(db.Model):
     deceasedDT = db.Column(db.Date)
     deceasedNotes = db.Column(db.Text)
 
-    # Relationships
-addresses = db.relationship('Address', back_populates='alumnus', cascade='all, delete-orphan')
-degrees = db.relationship('Degree', back_populates='alumnus', cascade='all, delete-orphan')
-employments = db.relationship('Employment', back_populates='alumnus', cascade='all, delete-orphan')
-donations = db.relationship('Donation', back_populates='alumnus', cascade='all, delete-orphan')
-skills = db.relationship('Skillset', back_populates='alumnus', cascade='all, delete-orphan')
-sentTo = db.relationship('SentTo', back_populates='alumnus', cascade='all, delete-orphan')
+    
+    addresses = db.relationship('Address', back_populates='alumnus', cascade='all, delete-orphan')
+    degrees = db.relationship('Degree', back_populates='alumnus', cascade='all, delete-orphan')
+    employments = db.relationship('Employment', back_populates='alumnus', cascade='all, delete-orphan')
+    donations = db.relationship('Donation', back_populates='alumnus', cascade='all, delete-orphan')
+    skills = db.relationship('Skillset', back_populates='alumnus', cascade='all, delete-orphan')
+    sentTo = db.relationship('SentTo', back_populates='alumnus', cascade='all, delete-orphan')
 
-
-def __repr__(self):
-    return f"<Alumni {self.alumniID} - {self.fName} {self.lName}>"
+    def __repr__(self):
+        return f"<Alumni {self.alumniID} - {self.fName} {self.lName}>"
