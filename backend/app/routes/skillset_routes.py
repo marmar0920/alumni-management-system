@@ -23,7 +23,10 @@ def view_skillset(SID):
 
 @skillset_bp.route('/add', methods=['GET', 'POST'])
 def add_skillset():
+    alumniID = request.args.get('alumniID', type=int)
     form = SkillsetForm()
+    if alumniID:
+        form.alumniID.data = alumniID
     if form.validate_on_submit():
         new_skill = Skillset(
             alumniID=form.alumniID.data,
@@ -36,7 +39,6 @@ def add_skillset():
         flash('Skill added successfully!', 'success')
         return redirect(url_for('alumni.edit_alumni', alumniID=form.alumniID.data))
     return render_template('skillset_form.html', form=form)
-
 @skillset_bp.route('/edit/<int:SID>', methods=['GET', 'POST'])
 def edit_skill(SID):
     skill = Skillset.query.get_or_404(SID)
