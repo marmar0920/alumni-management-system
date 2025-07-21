@@ -23,7 +23,7 @@
             <a href="{{ url_for('skillset.edit_skill', SID=skill.SID) }}" class="btn btn-sm btn-warning">Edit</a>
           {% endif %}
           {% if session.perms.delete == 'Y' %}
-            <form method="post" action="{{ url_for('skillset.delete_skill', SID=skill.SID) }}" style="display:inline">
+            <form method="post" action="{{ url_for('skillset.delete_skillset', SID=skill.SID) }}" style="display:inline">
               <button type="submit" class="btn btn-sm btn-danger">Delete</button>
             </form>
           {% endif %}
