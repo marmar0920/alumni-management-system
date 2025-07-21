@@ -9,7 +9,7 @@ class Donation(db.Model):
     donationDT = db.Column(db.Date, nullable=False)
     reason = db.Column(db.String(200))
     description = db.Column(db.String(200))
-
+    alumni = db.relationship("Alumni", back_populates="donations")
     def __repr__(self):
         return f'<Donation {self.donationAmount}>'
 

@@ -106,9 +106,7 @@
   <ul class="list-group mb-3">
     {% for donation in alumnus.donations %}
       <li class="list-group-item">
-        <a href="{{ url_for('donation.view_donation', donationID=donation.donationID) }}">
-          ${{ donation.amount }} on {{ donation.donationDate }}
-        </a>
+        ${{ donation.amount }} on {{ donation.donationDate }}
         - {{ donation.reason }}
         {% if donation.description %}<br>{{ donation.description }}{% endif %}
       </li>
@@ -118,9 +116,9 @@
   <p>No donations recorded.</p>
 {% endif %}
 {% if session.perms.insert == 'Y' %}
-  <a class="btn btn-secondary mb-3" href="{{ url_for('donation.add_donation', alumniID=alumnus.alumniID) }}">
-    Add New Donation
-  </a>
+<a class="btn btn-secondary mb-3" href="{{ url_for('donation.add_donation', alumniID=alumnus.alumniID) }}">
+  Add New Donation
+</a>
 {% endif %}
 
 <!-- Skills Section -->
