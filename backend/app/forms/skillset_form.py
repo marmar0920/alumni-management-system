@@ -4,14 +4,11 @@ from wtforms.validators import DataRequired, Length
 
 class SkillsetForm(FlaskForm):
     alumniID = IntegerField('Alumni ID', validators=[DataRequired()])
-    skillName = StringField('Skill Name', validators=[DataRequired(), Length(max=50)])
-    proficiencyLevel = SelectField('Proficiency', choices=[
+    skill = StringField('Skill Name', validators=[DataRequired(), Length(max=50)])
+    description = StringField('Description', validators=[DataRequired(), Length(max=500)])
+    proficiency = SelectField('Proficiency', choices=[
         ('Beginner', 'Beginner'),
         ('Intermediate', 'Intermediate'),
         ('Advanced', 'Advanced')
-    ], validators=[DataRequired()])
-    endorsementYN = SelectField('Endorsed?', choices=[
-        ('Y', 'Yes'),
-        ('N', 'No')
     ], validators=[DataRequired()])
     submit = SubmitField('Save')

@@ -14,6 +14,8 @@
     <table class="table table-striped table-bordered">
       <thead>
         <tr>
+          <th>ID</th>
+          <th>Alumni ID</th>
           <th>Company</th>
           <th>Job Title</th>
           <th>City</th>
@@ -28,6 +30,8 @@
       <tbody>
         {% for emp in employments %}
         <tr>
+          <td>{{ emp.EID }}</td>
+          <td>{{ emp.alumniID }}</td>
           <td>{{ emp.company }}</td>
           <td>{{ emp.jobTitle }}</td>
           <td>{{ emp.city or '-' }}</td>

@@ -4,10 +4,10 @@
   <h2>Skill</h2>
   <form method="post">
     {{ form.csrf_token }}
+    {{ form.skill.label }} {{ form.skill(class="form-control mb-2") }}
+    {{ form.proficiency.label }} {{ form.proficiency(class="form-control mb-2") }}
+    {{ form.description.label }} {{ form.description(class="form-control mb-2") }}
     {{ form.alumniID.label }} {{ form.alumniID(class="form-control mb-2") }}
-    {{ form.skillName.label }} {{ form.skillName(class="form-control mb-2") }}
-    {{ form.proficiencyLevel.label }} {{ form.proficiencyLevel(class="form-control mb-2") }}
-    {{ form.endorsementYN.label }} {{ form.endorsementYN(class="form-control mb-2") }}
     <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
   </form>
 {% endblock %}

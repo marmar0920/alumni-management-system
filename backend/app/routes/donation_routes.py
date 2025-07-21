@@ -28,13 +28,12 @@ def add_donation(alumniID):
         return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
     form = DonationForm()
     if form.validate_on_submit():
-        new_donation = Donation(
-            alumniID=alumniID,
-            amount=form.amount.data,
-            donationDate=form.donationDate.data,
-            reason=form.reason.data,
-            description=form.description.data,
-        )
+        new_donation = Donation(**{
+        f: getattr(form, f).data 
+        for f in form.data 
+        if f not in ('csrf_token', 'submit')
+        })
+
         db.session.add(new_donation)
         db.session.commit()
         flash('Donation added successfully', 'success')

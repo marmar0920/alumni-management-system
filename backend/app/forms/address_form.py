@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField
+from wtforms import StringField, DateField, SelectField, SubmitField, IntegerField
 from wtforms.validators import DataRequired, Length
 
 class AddressForm(FlaskForm):
+    alumniID = IntegerField('Alumni ID', validators=[DataRequired()])
     address = StringField(
         'Street Address',
         validators=[
