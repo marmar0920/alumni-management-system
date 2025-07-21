@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+t{% extends "base.html" %}
 {% block title %}{{ 'Edit' if alumnus else 'Add New' }} Alumnus{% endblock %}
 
 {% block content %}
@@ -137,7 +137,7 @@
   <p>No skills recorded.</p>
 {% endif %}
 {% if session.perms.insert == 'Y' %}
-  <a class="btn btn-secondary mb-3" href="{{ url_for('skillset.add_skill', alumniID=alumnus.alumniID) }}">
+  <a class="btn btn-secondary mb-3" href="{{ url_for('skillset.add_skillset', alumniID=alumnus.alumniID) }}">
     Add New Skill
   </a>
 {% endif %}
