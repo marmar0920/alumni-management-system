@@ -26,19 +26,3 @@
   </form>
   <a href="{{ url_for('donation.list_donations') }}" class="btn btn-secondary mt-2">Back to List</a>
 {% endblock %}
-{% extends "base.html" %}
-{% block title %}Donation Form{% endblock %}
-{% block content %}
-  <h2>Donation</h2>
-  <form method="post">
-    {{ form.csrf_token }}
-    {{ form.donationDT.label }} {{ form.donationDT(class="form-control mb-2") }}
-    {{ form.donationAmt.label }} {{ form.donationAmt(class="form-control mb-2") }}
-    {{ form.reason.label }} {{ form.reason(class="form-control mb-2") }}
-    {{ form.description.label }} {{ form.description(class="form-control mb-2") }}
-    {{ form.alumniID.label }} {{ form.alumniID(class="form-control mb-2") }}
-
-    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
-  </form>
-{% endblock %}
-
