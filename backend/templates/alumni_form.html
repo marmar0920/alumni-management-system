@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{{% extends "base.html" %}
 {% block title %}{{ 'Edit' if alumnus else 'Add New' }} Alumnus{% endblock %}
 
 {% block content %}
@@ -48,7 +48,7 @@
 {% else %}
   <p>No addresses on record.</p>
 {% endif %}
-{% if session.perms.insert == 'Y' or item == 'N' %}
+{% if session.perms.insert == 'Y' %}
   <a class="btn btn-secondary mb-3" href="{{ url_for('address.add_address', alumniID=alumnus.alumniID) }}">
     Add New Address
   </a>
@@ -70,7 +70,7 @@
 {% else %}
   <p>No degrees on record.</p>
 {% endif %}
-{% if session.perms.insert == 'Y' or item == 'N' %}
+{% if session.perms.insert == 'Y' %}
   <a class="btn btn-secondary mb-3" href="{{ url_for('degree.add_degree', alumniID=alumnus.alumniID) }}">
     Add New Degree
   </a>
@@ -94,7 +94,7 @@
 {% else %}
   <p>No employment records.</p>
 {% endif %}
-{% if session.perms.insert == 'Y' or item == 'N' %}
+{% if session.perms.insert == 'Y' %}
   <a class="btn btn-secondary mb-3" href="{{ url_for('employment.add_employment', alumniID=alumnus.alumniID) }}">
     Add New Employment
   </a>
@@ -117,7 +117,7 @@
 {% else %}
   <p>No donations recorded.</p>
 {% endif %}
-{% if session.perms.insert == 'Y' or item == 'N' %}
+{% if session.perms.insert == 'Y' %}
   <a class="btn btn-secondary mb-3" href="{{ url_for('donation.add_donation', alumniID=alumnus.alumniID) }}">
     Add New Donation
   </a>
@@ -129,7 +129,7 @@
   <ul class="list-group mb-3">
     {% for skill in alumnus.skills %}
       <li class="list-group-item">
-        <a href="{{ url_for('skillset.view_skillset, SID=skill.SID) }}">
+        <a href="{{ url_for('skillset.view_skill', SID=skill.SID) }}">
           {{ skill.skillName }} - {{ skill.proficiency }}
         </a>
       </li>
@@ -138,7 +138,7 @@
 {% else %}
   <p>No skills recorded.</p>
 {% endif %}
-{% if session.perms.insert == 'Y' or item == 'N' %}
+{% if session.perms.insert == 'Y' %}
   <a class="btn btn-secondary mb-3" href="{{ url_for('skillset.add_skill', alumniID=alumnus.alumniID) }}">
     Add New Skill
   </a>
