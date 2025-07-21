@@ -4,7 +4,7 @@
   <h2>Donation</h2>
   <form method="post">
     {{ form.csrf_token }}
-    {{ form.donationDate.label }} {{ form.donationDate(class="form-control mb-2") }}
+    {{ form.donationDT.label }} {{ form.donationDT(class="form-control mb-2") }}
     {{ form.amount.label }} {{ form.amount(class="form-control mb-2") }}
     {{ form.recurringYN.label }} {{ form.recurringYN(class="form-select mb-2") }}
     {{ form.notes.label }} {{ form.notes(class="form-control mb-2") }}
