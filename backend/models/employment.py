@@ -5,6 +5,7 @@ class Employment(db.Model):
 
     EID = db.Column(db.Integer, primary_key=True)
     alumniID = db.Column(db.Integer, db.ForeignKey('alumni.alumniID'))
+    alumnus = db.relationship('Alumni', back_populates='employments')
     company = db.Column(db.String(100))
     city = db.Column(db.String(50))
     state = db.Column(db.String(2))
@@ -14,7 +15,6 @@ class Employment(db.Model):
     endDate = db.Column(db.Date)
     currentYN = db.Column(db.String(100))
     
-    alumni = db.relationship("Alumni", back_populates="employments")
     def __repr__(self):
         return f'<Employment {self.company} - {self.jobTitle}>'
 

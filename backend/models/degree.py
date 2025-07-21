@@ -5,6 +5,7 @@ class Degree(db.Model):
 
     degreeID = db.Column(db.Integer, primary_key=True)
     alumniID = db.Column(db.Integer, db.ForeignKey('alumni.alumniID'))
+    alumnus = db.relationship('Alumni', back_populates='degrees')
     major = db.Column(db.String(50), nullable=False)
     minor = db.Column(db.String(50))
     graduationDT = db.Column(db.Date)

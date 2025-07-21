@@ -4,12 +4,12 @@ class Donation(db.Model):
     __tablename__ = 'donation'
     donationID = db.Column(db.Integer, primary_key=True)
     alumniID = db.Column(db.Integer, db.ForeignKey('alumni.alumniID'))
+    alumni = db.relationship("Alumni", back_populates="donations")
     donationAmt = db.Column(db.Integer)
     donationDT = db.Column(db.Date, nullable=False)
     reason = db.Column(db.String(200))
     description = db.Column(db.String(200))
     
-    alumni = db.relationship("Alumni", back_populates="donations")
 
     def __repr__(self):
         return f'<Donation {self.donationAmt}>'
