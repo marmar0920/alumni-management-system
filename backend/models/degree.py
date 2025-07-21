@@ -11,7 +11,7 @@ class Degree(db.Model):
     university = db.Column(db.String(100))
     city = db.Column(db.String(50))
     state = db.Column(db.String(2))
-
+    alumnus = db.relationship('Alumni', back_populates='degrees')
     def __repr__(self):
         return f'<Degree {self.major}>'
 
