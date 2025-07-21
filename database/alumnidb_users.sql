@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `UID` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `fName` varchar(20) NOT NULL,
   `lName` varchar(20) NOT NULL,
   `jobDescription` varchar(50) DEFAULT NULL,
