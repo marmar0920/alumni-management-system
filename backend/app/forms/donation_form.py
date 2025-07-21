@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import IntegerField, DecimalField, StringField, DateField, SubmitField
+from wtforms import IntegerField, DecimalField, SelectField, StringField, DateField, SubmitField
 from wtforms.validators import DataRequired, Length
 
 class DonationForm(FlaskForm):

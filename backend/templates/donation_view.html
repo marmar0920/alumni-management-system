@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Donation Details{% endblock %}
+{% block content %}
+  <h2>Donation Details</h2>
+  <ul class="list-group mb-3">
+    <li class="list-group-item"><b>Amount:</b> ${{ donation.amount }}</li>
+    <li class="list-group-item"><b>Date:</b> {{ donation.donationDate }}</li>
+    <li class="list-group-item"><b>Reason:</b> {{ donation.reason }}</li>
+    <li class="list-group-item"><b>Description:</b> {{ donation.description or "N/A" }}</li>
+    <!-- Add more fields if your Donation model has them -->
+  </ul>
+  <a href="{{ url_for('alumni.edit_alumni', alumniID=donation.alumniID) }}" class="btn btn-secondary">Back to Alumnus</a>
+{% endblock %}

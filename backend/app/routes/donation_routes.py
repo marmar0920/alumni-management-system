@@ -22,10 +22,10 @@ def view_donation(donationID):
     return render_template('donation_view.html', donation=donation)
 
 @donation_bp.route('/add', methods=['GET', 'POST'])
-def add_donation():
+def add_donation(alumniID):
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')
-        return redirect(url_for('donation.list_donations'))
+        return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
     form = DonationForm()
     if form.validate_on_submit():
         new_donation = Donation(**{
@@ -33,10 +33,11 @@ def add_donation():
         for f in form.data 
         if f not in ('csrf_token', 'submit')
         })
+
         db.session.add(new_donation)
         db.session.commit()
         flash('Donation added successfully', 'success')
-        return redirect(url_for('donation.list_donations'))
+        return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))  # <--- Redirect to alumnus
     return render_template('donation_form.html', form=form)
 
 @donation_bp.route('/edit/<int:donationID>', methods=['GET', 'POST'])
