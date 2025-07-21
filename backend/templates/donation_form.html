@@ -1,5 +1,33 @@
 {% extends "base.html" %}
 {% block title %}Donation Form{% endblock %}
+
+{% block content %}
+  <h2>{{ 'Edit' if form.donationID.data else 'Add New' }} Donation</h2>
+  <form method="post">
+    {{ form.csrf_token }}
+    <div class="mb-3">
+      {{ form.alumniID.label }} {{ form.alumniID(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.donationAmt.label }} {{ form.donationAmt(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.donationDT.label }} {{ form.donationDT(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.reason.label }} {{ form.reason(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.description.label }} {{ form.description(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-success">
+      {{ form.submit.label.text if form.submit.label.text else 'Save' }}
+    </button>
+  </form>
+  <a href="{{ url_for('donation.list_donations') }}" class="btn btn-secondary mt-2">Back to List</a>
+{% endblock %}
+{% extends "base.html" %}
+{% block title %}Donation Form{% endblock %}
 {% block content %}
   <h2>Donation</h2>
   <form method="post">
