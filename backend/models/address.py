@@ -11,7 +11,8 @@ class Address(db.Model):
     zipCode = db.Column(db.String(10), nullable=False)
     activeYN = db.Column(db.String(1), default='Y')
     primaryYN = db.Column(db.String(1), default='N')
-
+    
+    alumnus = db.relationship('Alumni', back_populates='addresses')
     # alumni = relationship comes from Alumni.backref('alumnus')
 
     def __repr__(self):
