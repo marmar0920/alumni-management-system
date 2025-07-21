@@ -4,8 +4,8 @@ from wtforms.validators import DataRequired, Length
 
 class DonationForm(FlaskForm):
     alumniID = IntegerField('Alumni ID', validators=[DataRequired()])
-    amount = DecimalField('Amount', places=2, validators=[DataRequired()])
-    date = DateField('Date', format='%Y-%m-%d')
-    reason = StringField('Reason', validators=[Length(max=100)])
-    description = StringField('Description', validators=[Length(max=255)])
+    donationAmt = DecimalField('Amount', validators=[DataRequired()])
+    donationDT = DateField('Donation Date', format='%Y-%m-%d', validators=[DataRequired()])
+    reason = StringField('Reason')
+    description = StringField('Description')
     submit = SubmitField('Save')
