@@ -139,7 +139,7 @@
   <p>No skills recorded.</p>
 {% endif %}
 {% if session.perms.insert == 'Y' %}
-  <a class="btn btn-secondary mb-3" href="{{ url_for('skillset.add_skillset', alumniID=alumnus.alumniID) }}">
+  <a class="btn btn-secondary mb-3" href="{{ url_for('skillset.add_skill', alumniID=alumnus.alumniID) }}">
     Add New Skill
   </a>
 {% endif %}
