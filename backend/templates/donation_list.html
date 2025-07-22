@@ -3,9 +3,7 @@
 {% block content %}
   <h2>Donations</h2>
     {% if session.perms.insert == 'Y' %}
-    <a class="btn btn-secondary mb-3"
-   href="{{ url_for('donation.add_donation', alumniID=alumnus.alumniID) }}">
-   Add New Donation
+
     {% endif %}
   <table class="table table-striped">
     <thead>
