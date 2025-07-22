@@ -21,7 +21,7 @@ def view_skillset(SID):
     skillset = Skillset.query.get_or_404(SID)
     return render_template('skillset_view.html', skillset=skillset)
 
-@skillset_bp.route('/add', methods=['GET', 'POST'])
+@skillset_bp.route('/add/<int:alumniID>', methods=['GET', 'POST'])
 def add_skillset(alumniID):
     alumniID = request.args.get('alumniID', type=int)
     form = SkillsetForm()

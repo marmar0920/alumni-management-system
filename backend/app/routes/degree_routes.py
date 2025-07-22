@@ -21,7 +21,7 @@ def view_degree(degreeID):
     degree = Degree.query.get_or_404(degreeID)
     return render_template('degree_view.html', degree=degree)
 
-@degree_bp.route('/add', methods=['GET', 'POST'])
+@degree_bp.route('/add/<int:alumniID>', methods=['GET', 'POST'])
 def add_degree(alumniID):
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')

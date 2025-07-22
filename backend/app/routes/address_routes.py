@@ -22,7 +22,7 @@ def view_address(addressID):
     address = Address.query.get_or_404(addressID)
     return render_template('address_view.html', address=address)
 
-@address_bp.route('/add', methods=['GET', 'POST'])
+@address_bp.route('/add/<int:alumniID>', methods=['GET', 'POST'])
 def add_address(alumniID):
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')

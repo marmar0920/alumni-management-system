@@ -21,7 +21,7 @@ def view_donation(donationID):
     donation = Donation.query.get_or_404(donationID)
     return render_template('donation_view.html', donation=donation)
 
-@donation_bp.route('/add', methods=['GET', 'POST'])
+@donation_bp.route('/add/<int:alumniID>', methods=['GET', 'POST'])
 def add_donation(alumniID):
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')
