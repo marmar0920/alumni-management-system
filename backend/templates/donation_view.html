@@ -9,5 +9,8 @@
     <li class="list-group-item"><b>Description:</b> {{ donation.description or "N/A" }}</li>
     <!-- Add more fields if your Donation model has them -->
   </ul>
+  <a class="btn btn-secondary mb-3"
+   href="{{ url_for('donation.add_donation', alumniID=alumnus.alumniID) }}">
+   Add New Donation
   <a href="{{ url_for('alumni.edit_alumni', alumniID=donation.alumniID) }}" class="btn btn-secondary">Back to Alumnus</a>
 {% endblock %}
