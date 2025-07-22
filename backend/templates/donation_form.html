@@ -24,7 +24,4 @@
       {{ form.submit.label.text if form.submit.label.text else 'Save' }}
     </button>
   </form>
-  <a href="{{ url_for('donation.list_donations') }}" class="btn btn-secondary mt-2">Back to List</a>
-  <a href="{{ url_for('donation.add_donation', alumniID=alumnus.alumniID) }}" class="btn btn-primary mb-3">Add New Donation</a>
-
   {% endblock %}
