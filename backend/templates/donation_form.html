@@ -2,7 +2,7 @@
 {% block title %}Donation Form{% endblock %}
 
 {% block content %}
-  <h2>{{ 'Edit' if form.donationID.data else 'Add New' }} Donation</h2>
+  <h2>{{ 'Edit' if donation else 'Add New' }} Donation</h2>
   <form method="post">
     {{ form.csrf_token }}
     <div class="mb-3">
@@ -24,4 +24,4 @@
       {{ form.submit.label.text if form.submit.label.text else 'Save' }}
     </button>
   </form>
-  {% endblock %}
+{% endblock %}
