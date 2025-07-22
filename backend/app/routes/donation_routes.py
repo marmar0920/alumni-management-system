@@ -27,19 +27,19 @@ def add_donation(alumniID):
         flash('Not allowed', 'warning')
         return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
     form = DonationForm()
+    if request.method == 'GET':
+        form.alumniID.data = alumniID  # Pre-populate alumniID in the form
     if form.validate_on_submit():
         new_donation = Donation(**{
-        f: getattr(form, f).data 
-        for f in form.data 
-        if f not in ('csrf_token', 'submit')
+            f: getattr(form, f).data 
+            for f in form.data 
+            if f not in ('csrf_token', 'submit')
         })
-
         db.session.add(new_donation)
         db.session.commit()
         flash('Donation added successfully', 'success')
-        return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))  # <--- Redirect to alumnus
+        return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
     return render_template('donation_form.html', form=form)
-
 @donation_bp.route('/edit/<int:donationID>', methods=['GET', 'POST'])
 def edit_donation(donationID):
     if session.get('perms', {}).get('update') != 'Y':

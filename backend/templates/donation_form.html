@@ -25,4 +25,6 @@
     </button>
   </form>
   <a href="{{ url_for('donation.list_donations') }}" class="btn btn-secondary mt-2">Back to List</a>
-{% endblock %}
+  <a href="{{ url_for('donation.add_donation', alumniID=alumnus.alumniID) }}" class="btn btn-primary mb-3">Add New Donation</a>
+
+  {% endblock %}
