@@ -22,7 +22,7 @@ def view_employment(EID):
     return render_template('employment_view.html', employment=employment)
 
 @employment_bp.route('/add', methods=['GET', 'POST'])
-def add_employment():
+def add_employment(alumniID):
     # Make sure user has permission to insert
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')

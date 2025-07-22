@@ -22,7 +22,7 @@ def view_skillset(SID):
     return render_template('skillset_view.html', skillset=skillset)
 
 @skillset_bp.route('/add', methods=['GET', 'POST'])
-def add_skillset():
+def add_skillset(alumniID):
     alumniID = request.args.get('alumniID', type=int)
     form = SkillsetForm()
     if alumniID:
