@@ -22,33 +22,43 @@ def view_degree(degreeID):
     return render_template('degree_view.html', degree=degree)
 
 @degree_bp.route('/add', methods=['GET', 'POST'])
-def add_degree():
+def add_degree(alumniID):
     if session.get('perms', {}).get('insert') != 'Y':
         flash('Not allowed', 'warning')
-        return redirect(url_for('degree.list_degrees'))
+        return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
     form = DegreeForm()
+    if request.method == 'GET':
+        form.alumniID.data = alumniID
     if form.validate_on_submit():
-        new_degree = Degree(**{f: getattr(form, f).data for f in form.data if f not in ('csrf_token', 'submit')})
+        new_degree = Degree(
+            alumniID=alumniID,
+            major=form.major.data,
+            minor=form.minor.data,
+            graduationDate=form.graduationDate.data,
+            university=form.university.data,
+            city=form.city.data,
+            state=form.state.data
+        )
         db.session.add(new_degree)
         db.session.commit()
-        flash('Degree added successfully', 'success')
-        return redirect(url_for('degree.list_degrees'))
+        flash('Degree added successfully!', 'success')
+        # Redirect to the Alumnus view page after saving
+        return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
     return render_template('degree_form.html', form=form)
 
 @degree_bp.route('/edit/<int:degreeID>', methods=['GET', 'POST'])
 def edit_degree(degreeID):
-    if session.get('perms', {}).get('update') != 'Y':
-        flash('Unauthorized', 'warning')
-        return redirect(url_for('degree.list_degrees'))
     degree = Degree.query.get_or_404(degreeID)
+    if session.get('perms', {}).get('update') != 'Y':
+        flash('Not allowed', 'warning')
+        return redirect(url_for('alumni.edit_alumni', alumniID=degree.alumniID))
     form = DegreeForm(obj=degree)
     if form.validate_on_submit():
         form.populate_obj(degree)
         db.session.commit()
-        flash('Degree updated successfully', 'success')
-        return redirect(url_for('degree.list_degrees'))
+        flash('Degree updated successfully!', 'success')
+        return redirect(url_for('alumni.edit_alumni', alumniID=degree.alumniID))
     return render_template('degree_form.html', form=form)
-
 @degree_bp.route('/delete/<int:degreeID>', methods=['POST'])
 def delete_degree(degreeID):
     if session.get('perms', {}).get('delete') != 'Y':

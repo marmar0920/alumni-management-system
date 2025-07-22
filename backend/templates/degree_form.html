@@ -3,13 +3,26 @@
 {% block content %}
   <h2>Degree</h2>
   <form method="post">
-    {{ form.csrf_token }}
-    {{ form.degreeType.label }} {{ form.degreeType(class="form-control mb-2") }}
-    {{ form.university.label }} {{ form.university(class="form-control mb-2") }}
-    {{ form.major.label }} {{ form.major(class="form-control mb-2") }}
-    {{ form.conferredDate.label }} {{ form.conferredDate(class="form-control mb-2") }}
-    {{ form.primaryYN.label }} {{ form.primaryYN(class="form-select mb-2") }}
-    <button type="submit" class="btn btn-success">{{ form.submit.label.text }}</button>
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.major.label }} {{ form.major(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.minor.label }} {{ form.minor(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.graduationDate.label }} {{ form.graduationDate(class="form-control", placeholder="YYYY-MM-DD") }}
+    </div>
+    <div class="mb-3">
+      {{ form.university.label }} {{ form.university(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.city.label }} {{ form.city(class="form-control") }}
+    </div>
+    <div class="mb-3">
+      {{ form.state.label }} {{ form.state(class="form-control") }}
+    </div>
+    {{ form.submit(class="btn btn-success") }}
   </form>
 {% endblock %}
 
