@@ -51,7 +51,7 @@ alumni-management-system/
 - Python 3.10 or higher
 - pip
 - Git (optional)
-- MySQL (optional — SQLite is used by default)
+- MySQL 
 
 ---
 
@@ -90,7 +90,7 @@ Create a configuration file like this:
 ```python
 class Config:
     SECRET_KEY = 'your_secret_key'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///alumni.db'  # Replace with your MySQL URI if needed
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:mardnie@localhost/alumnidb"  # Replace with your MySQL URI if needed
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 ```
 
