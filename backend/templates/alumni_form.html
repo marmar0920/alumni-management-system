@@ -71,9 +71,8 @@ t{% extends "base.html" %}
   <p>No degrees on record.</p>
 {% endif %}
 {% if session.perms.insert == 'Y' %}
-  <a class="btn btn-secondary mb-3"
-   href="{{ url_for('degree.add_degree', alumniID=alumnus.alumniID) }}">
-    Add New Degree
+<a class="btn btn-secondary mb-3" href="{{ url_for('degree.add_degree', alumniID=alumnus.alumniID) }}">
+  Add New Degree
 </a>
 
 {% endif %}
