@@ -44,7 +44,7 @@ def add_degree(alumniID):
         flash('Degree added successfully!', 'success')
         # Redirect to the Alumnus view page after saving
         return redirect(url_for('alumni.edit_alumni', alumniID=alumniID))
-    return render_template('alumni_form.html', form=form, alumnus=alumnuniID)
+    return render_template('alumni_form.html', form=form, alumnus=alumniID)
 
 @degree_bp.route('/edit/<int:degreeID>', methods=['GET', 'POST'])
 def edit_degree(degreeID):
